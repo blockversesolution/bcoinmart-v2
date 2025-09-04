@@ -16,14 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (Throwable $e) {
-            if ($e instanceof MaintenanceModeException || ($e instanceof HttpResponseException && $e->getStatusCode() === 503)) {
-                return view(
-                    'frontend.maintenance.system_maintenance',
-                );
-            }
-
-            return null;
-        });
+       //
     })->create();
 
