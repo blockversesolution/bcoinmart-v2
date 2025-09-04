@@ -206,7 +206,7 @@
                                 </ul>
                             </div>
                             <div class="maintenance-button">
-                                <a href="#" class="primary-btn d-inline-block"><i class="fa-solid fa-arrow-left"></i> &nbsp; Back To Home</a>
+                                <a href="{{url('/')}}" class="primary-btn d-inline-block"><i class="fa-solid fa-arrow-left"></i> &nbsp; Back To Home</a>
                             </div>
                             <div
                                 class="d-flex flex-wrap align-items-center g-20 mt-40 justify-content-center justify-content-lg-start"
