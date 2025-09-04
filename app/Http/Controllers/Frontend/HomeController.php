@@ -16,4 +16,9 @@ class HomeController extends Controller
     {
         return view('frontend.buy.index');
     }
+
+    public function markets()
+    {
+        return view('frontend.markets.index');
+    }
 }

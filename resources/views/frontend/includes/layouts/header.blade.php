@@ -114,10 +114,10 @@
                 >
                     <ul class="navbar-nav mx-auto main-navs">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('frontend.buy')}}">Buy Crypto</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.buy') ? 'active' : '' }}" href="{{route('frontend.buy')}}">Buy Crypto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="markets.html">Markets</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.markets') ? 'active' : '' }}" href="{{route('frontend.markets')}}">Markets</a>
                         </li>
                         <li class="nav-item dropdown">
 

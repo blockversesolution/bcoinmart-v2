@@ -1,4 +1,4 @@
-<section class="embark-section mt-120">
+<section class="embark-section mt-120 {{ url('/') !== Request::url() ? 'mb-120' : '' }}">
     <div class="container">
         <div class="embark-text">
             <!-- Default gradient borders -->
@@ -7,9 +7,7 @@
                  data-aos-delay="200"
                  data-aos-duration="600">
                 <div class="col-md-8 offset-md-2">
-                    <div
-                        class="common-heading-section"
-                    >
+                    <div class="common-heading-section">
                         <h2 class="text-primary">
                             Embark on Your Crypto Journey Today!
                         </h2>
@@ -19,10 +17,7 @@
                             your fingertips.
                         </p>
                         <div class="d-inline-block mt-5">
-                            <a
-                                href="sign-up.html"
-                                class="primary-btn"
-                            >
+                            <a href="#" class="primary-btn" >
                                 Sign Up Now
                                 <i class="fa-solid fa-user-plus"></i>
                             </a>

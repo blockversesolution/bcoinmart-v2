@@ -24,3 +24,5 @@
 <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/play-animation.css" />
 
 <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/responsive.css" />
+
+@yield('css')
