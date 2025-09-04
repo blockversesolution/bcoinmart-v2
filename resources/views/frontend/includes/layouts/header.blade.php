@@ -117,12 +117,12 @@
                             <a class="nav-link {{ request()->routeIs('frontend.buy') ? 'active' : '' }}" href="{{route('frontend.buy')}}">Buy Crypto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->routeIs('frontend.markets') || request()->routeIs('frontend.trading')) ? 'active' : '' }}" href="{{route('frontend.markets')}}">Markets</a>
+                            <a class="nav-link {{ (request()->routeIs('frontend.markets') || request()->routeIs('frontend.trading') || request()->routeIs('frontend.trading') || request()->routeIs('frontend.token.unlock')) ? 'active' : '' }}" href="{{route('frontend.markets')}}">Markets</a>
 
                         </li>
                         <li class="nav-item dropdown">
 
-                            <a class="nav-link dropdown-toggle mega-menu-link" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle mega-menu-link {{request()->routeIs('frontend.p2p.buy') || request()->routeIs('frontend.p2p.sell') ? 'active' : ''}}" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Trade
                                 <i class="fa-solid fa-chevron-down ms-1"></i>
                             </a>
@@ -131,7 +131,7 @@
                             <div class="dropdown-menu custom-mega-dropdown p-4 shadow-lg border-0 rounded-3" aria-labelledby="moreDropdown">
                                 <div class="row row-cols-1 row-cols-md-2 g-4">
                                     <div class="col">
-                                        <a href="p2p-buy.html" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.p2p.buy')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">P2P</strong>
@@ -141,7 +141,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <a href="#" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.page.maintenance')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">Crypto for Good</strong>
@@ -158,7 +158,7 @@
                         </li>
                         <li class="nav-item dropdown">
 
-                            <a class="nav-link dropdown-toggle mega-menu-link" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle mega-menu-link {{request()->routeIs('frontend.earn.overview') ? 'active' : ''}}" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Earn
                                 <i class="fa-solid fa-chevron-down ms-1"></i>
                             </a>
@@ -167,7 +167,7 @@
                             <div class="dropdown-menu custom-mega-dropdown p-4 shadow-lg border-0 rounded-3" aria-labelledby="moreDropdown">
                                 <div class="row row-cols-1 row-cols-md-2 g-4">
                                     <div class="col">
-                                        <a href="earn.html" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.earn.overview')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">Overview</strong>
@@ -177,7 +177,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <a href="#" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.page.maintenance')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">Crypto for Good</strong>
@@ -190,11 +190,11 @@
                             </div>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" href="#">Square</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('frontend.page.maintenance')}}">Square</a></li>
 
                         <!-- More Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mega-menu-link" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle mega-menu-link {{request()->routeIs('frontend.affiliate') || request()->routeIs('frontend.refer') ? 'active' : ''}}" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 More
                                 <i class="fa-solid fa-chevron-down ms-1"></i>
                             </a>
@@ -202,7 +202,7 @@
                             <div class="dropdown-menu custom-mega-dropdown p-4 shadow-lg border-0 rounded-3" aria-labelledby="moreDropdown">
                                 <div class="row row-cols-1 row-cols-md-2 g-4">
                                     <div class="col">
-                                        <a href="affiliate.html" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.affiliate')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">Affiliate</strong>
@@ -212,7 +212,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <a href="refer.html" class="text-decoration-none d-flex align-items-start">
+                                        <a href="{{route('frontend.refer')}}" class="text-decoration-none d-flex align-items-start">
                                             <div class="icon-box bg-white rounded me-3"></div>
                                             <div>
                                                 <strong class="text-white">Refer</strong>
@@ -383,7 +383,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Futures</a>
+                        <a class="nav-link" href="{{route('frontend.page.maintenance')}}">Futures</a>
                     </li>
 
                     <!-- Earn accordion -->

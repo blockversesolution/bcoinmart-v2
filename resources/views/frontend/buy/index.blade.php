@@ -33,7 +33,7 @@
 
 @endsection
 
-@section('js')
+@push('js')
     <script>
 
         // Auto Scroll Multiple SimpleBar Scroll Boxes
@@ -450,4 +450,4 @@
             });
         });
     </script>
-@endsection
+@endpush

@@ -10,7 +10,7 @@
 
 <script src="{{asset('frontend')}}/assets/js/main.js"></script>
 
-
+@stack('js')
 <!-- <script>
   const cards = document.querySelectorAll(".crypto-card-sm");
   let index = 0;
@@ -379,4 +379,3 @@
 
 </script>
 
-@yield('js')

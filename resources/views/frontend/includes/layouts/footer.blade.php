@@ -5,7 +5,7 @@
                 <!-- single item  -->
                 <div class="col-md-12 col-xl-4">
                     <div class="footer-logo text-center text-sm-start">
-                        <a href="index.html">
+                        <a href="{{url('/')}}">
                             <img
                                 class="footer-img"
                                 src="{{asset('frontend')}}/assets/images/logo.png"
@@ -42,9 +42,9 @@
                         </h3>
                         <ul class="text-center text-sm-start">
                             <li>
-                                <a class="footer-menu-link" href="#">One-Click Buy</a>
+                                <a class="footer-menu-link" href="{{route('frontend.p2p.buy')}}">One-Click Buy</a>
                             </li>
-                            <li><a class="footer-menu-link" href="#">P2P Trading</a></li>
+                            <li><a class="footer-menu-link" href="{{route('frontend.p2p.buy')}}">P2P Trading</a></li>
                             <li><a class="footer-menu-link" href="#">VIP Program</a></li>
                         </ul>
                     </div>
@@ -71,7 +71,7 @@
                             Product
                         </h3>
                         <ul class="text-center text-sm-start">
-                            <li><a class="footer-menu-link" href="#">Trade</a></li>
+                            <li><a class="footer-menu-link" href="{{route('frontend.p2p.buy')}}">Trade</a></li>
                             <li><a class="footer-menu-link" href="#">Derivatives</a></li>
                             <li><a class="footer-menu-link" href="#">Launchpad</a></li>
                         </ul>
@@ -126,7 +126,7 @@
             <div class="footer-bottom-text">
                 <p class="footer-bottom-copyright">
                     Copyright &copy; 2025 by
-                    <a href="#">BcoinMart</a>
+                    <a href="{{url('/')}}">BcoinMart</a>
                 </p>
             </div>
         </div>

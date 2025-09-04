@@ -25,4 +25,4 @@
 
 <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/responsive.css" />
 
-@yield('css')
+@stack('css')
