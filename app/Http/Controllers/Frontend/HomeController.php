@@ -21,4 +21,9 @@ class HomeController extends Controller
     {
         return view('frontend.markets.index');
     }
+
+    public function trading()
+    {
+        return view('frontend.trading.index');
+    }
 }

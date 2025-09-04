@@ -117,7 +117,8 @@
                             <a class="nav-link {{ request()->routeIs('frontend.buy') ? 'active' : '' }}" href="{{route('frontend.buy')}}">Buy Crypto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('frontend.markets') ? 'active' : '' }}" href="{{route('frontend.markets')}}">Markets</a>
+                            <a class="nav-link {{ (request()->routeIs('frontend.markets') || request()->routeIs('frontend.trading')) ? 'active' : '' }}" href="{{route('frontend.markets')}}">Markets</a>
+
                         </li>
                         <li class="nav-item dropdown">
 
