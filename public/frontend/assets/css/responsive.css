@@ -1,0 +1,970 @@
+@media screen and (max-width: 1400px) {
+  .puzzle-design-card svg {
+    height: 290px;
+  }
+  .puzzle-text {
+    top: -25px;
+    left: 0;
+  }
+  .puzzle-design-buy .puzzle-text {
+    top: -30px;
+  }
+  .shap-content {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .puzzle-text {
+    padding: 44px;
+  }
+  .shap-title {
+    font-size: 18px;
+  }
+  .sign-up-box {
+    max-width: 408px;
+  }
+  #navbarText .nav-link {
+    padding: 0 10px !important;
+  }
+  .common-heading-section.affiliate-hero h2 {
+    font-size: 42px;
+    line-height: 55px;
+  }
+  .common-heading-section.affiliate-hero h2 span {
+    font-size: 60px;
+    line-height: 72px;
+  }
+}
+@media screen and (max-width: 1270px) {
+  .header-area .navbar-brand img {
+    width: 130px;
+  }
+}
+@media screen and (min-width: 1199px) {
+  .offcanvas-backdrop,
+  .offcanvas {
+    display: none;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .sign-up-box {
+    max-width: 310px;
+  }
+  .offcanvas-backdrop,
+  .offcanvas {
+    display: block;
+  }
+  .secondary-btn,
+  .primary-btn {
+    justify-content: center;
+  }
+  .calculate-child label {
+    font-size: 14px;
+  }
+  .footer-text {
+    margin-bottom: 30px;
+  }
+  .sign-up-box .primary-btn-sm {
+    padding: 10px 18px;
+  }
+  .shap-title {
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .puzzle-design-shape-2 .puzzle-text {
+    padding-left: 56px;
+  }
+  .mobile-search-view,
+  .mobile-language-view {
+    display: block;
+  }
+  .desktop-view,
+  .desktop-language-view {
+    display: none;
+  }
+  .nav-link {
+    padding: 10px !important;
+  }
+  .hero-circle-area {
+    max-width: 600px;
+  }
+  .crypto-card-sm {
+    padding: 6px;
+  }
+  .common-heading-section h1 {
+    font-size: 56px;
+    line-height: 62px;
+  }
+  .accordion-button {
+    font-size: 20px;
+  }
+  .accordion-title {
+    padding-right: 15px;
+    padding-left: 5px;
+  }
+  .hero-section {
+    padding-bottom: 130px;
+  }
+  .buy-sel-tabs {
+    margin: 0px auto 0 auto;
+  }
+  .instant-crypto-support {
+    justify-content: center;
+  }
+  .mt-responsive.mt-60 {
+    margin-top: 00px;
+  }
+  .stats-row {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .puzzle-design-card p {
+    font-size: 14px;
+  }
+  .earn-hero-area {
+    background: url(../images/earn/bg.png) no-repeat scroll center center /
+      cover;
+  }
+}
+@media screen and (max-width: 991px) {
+  .common-heading-section.affiliate-hero h2 span {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .common-heading-section.affiliate-hero h2 span {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .popular-grid {
+    justify-content: start !important;
+  }
+  .maintenance-heading h1 {
+    margin-top: 110px;
+  }
+  .maintenance-thumbnails {
+    display: none;
+  }
+
+  .buy-trasection-search-flex {
+    flex-direction: column;
+    gap: 25px;
+  }
+  .puzzle-design-buy .puzzle-text {
+    top: 0;
+  }
+  .recurring-exchange-text .header {
+    flex-direction: column;
+  }
+  .puzzle-design-buy .puzzle-text {
+    top: 0;
+  }
+  .calculate-child label {
+    font-size: 11px;
+  }
+  .market-tabs ul,
+  .market-crypto-tab-area .actionTab {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    align-items: center;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  .market-tabs ul::-webkit-scrollbar,
+  .market-crypto-tab-area .actionTab::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .market-tabs ul a,
+  .market-crypto-tab-area .actionTab button {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .market-crypto-tab-area .actionTab .nav-link {
+    font-size: 14px;
+  }
+  .market-tabs-search .actionTab {
+    margin-right: 10px;
+  }
+  /* rakib css */
+  .accordion-bcoinmart .accordion-button {
+    font-size: 18px;
+    padding: 25px !important;
+  }
+  .accordion-bcoinmart .accordion-body {
+    padding: 25px !important;
+    padding-top: 0 !important;
+  }
+  .bcoinmart-accordion-body {
+    font-size: 15px;
+  }
+  .learning-hub-card-info {
+    padding: 20px;
+  }
+  .learning-hub-card-info p {
+    font-size: 18px;
+  }
+  /* rakib code start  */
+  .doc-area {
+    padding-top: 90px;
+  }
+  .doc-text-title {
+    font-size: 22px;
+    padding-bottom: 8px;
+  }
+  .doc-text-content {
+    font-size: 18px;
+  }
+  .doc-text-content span {
+    font-size: 16px;
+  }
+  .recurring-learning-hub {
+    padding-bottom: 90px;
+  }
+  .accordion-bcoinmart {
+    padding-top: 90px;
+  }
+
+  .mb-120 {
+    margin-bottom: 90px;
+  }
+  .mt-120 {
+    margin-top: 90px;
+  }
+  .puzzle-design-wrapper {
+    /* flex-direction: column; */
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .puzzle-design-card {
+    /* width: 100%; */
+    flex: 0 0 48%;
+  }
+
+  .puzzle-design-card svg {
+    width: 100%;
+    height: 300px;
+  }
+
+  .puzzle-design-shape-2 {
+    transform: translateX(0);
+  }
+  .puzzle-design-shape-2 .puzzle-text {
+    padding-left: 86px;
+  }
+  .hero-circle-area > img {
+    display: none;
+  }
+  .hero-circle-area,
+  .crypto-card-sm {
+    position: initial;
+  }
+  .hero-circle-area {
+    max-width: 100%;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .crypto-card-sm {
+    transform: scale(1);
+    max-width: 165px;
+    width: 100%;
+  }
+  .card-1 {
+    padding: 10px;
+  }
+  .faq-image {
+    padding-left: 0px;
+  }
+  .accordion-body {
+    font-size: 14px;
+  }
+  .accordion-icon {
+    width: 65px !important;
+    flex: 0 0 65px !important;
+  }
+  .payment-select span {
+    font-size: 12px;
+  }
+  #buySellTabContent {
+    padding: 25px 20px;
+  }
+  .custom-card {
+    flex: 0 0 45%;
+    margin-left: 0 !important;
+  }
+  .faq-section {
+    padding-bottom: 96px;
+    padding-top: 151px;
+  }
+  .common-heading-section h2 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .hero-section {
+    padding-top: 190px;
+  }
+  .process-card-content h4 img {
+    max-width: 40px;
+  }
+  td.trade-child {
+    height: 41px;
+  }
+  .accordion-opportunity .accordion-button {
+    padding-right: 50px !important;
+  }
+  .maintenance-left {
+    position: inherit;
+  }
+  .maintenance-button {
+    text-align: center;
+  }
+  .maintenance-body {
+    margin-top: 30px;
+  }
+  .maintenance-thumbnails {
+    height: auto;
+  }
+
+  .maintenance-heading p {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .tabs-slide .owl-nav {
+    display: none !important;
+  }
+
+  .tabs-slide {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .p2p-tabs-area .tabs-slide {
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .puzzle-design-shape-2 .puzzle-text {
+    padding-left: 66px !important;
+  }
+  .lotti-indicator {
+    left: 26%;
+    display: block;
+  }
+  table.dataTable > tbody > tr.child span.dtr-title {
+    text-align: left;
+  }
+  .cryptoTable .dtr-details span {
+    text-align: right;
+  }
+  .common-heading-section p {
+    font-size: 14px;
+    padding: 0 15px;
+    line-height: 24px;
+  }
+  .sign-up-box-content {
+    background: #181a20f5;
+  }
+  .signup-img {
+    display: none;
+  }
+  .information-form #scroll-box {
+    max-height: 100% !important;
+  }
+  .signup-content {
+    padding-bottom: 0;
+  }
+  .signup-content {
+    padding-right: 25px 45px;
+  }
+  .sing-up-social ul li a {
+    padding: 12px;
+  }
+  .sing-up-social ul li a img {
+    width: 25px;
+  }
+  .form-input.checkbox-input {
+    margin: 15px 0 18px 0;
+  }
+  .sign-up-area {
+    padding: 25px;
+    background: url(../images/sign-up/signup.png) no-repeat scroll bottom left /
+      cover;
+  }
+
+  .top-cryptos-card-main {
+    margin: 0 auto;
+  }
+
+  .form-input label {
+    text-align: left;
+  }
+
+  .signup-content {
+    text-align: center;
+    padding: 25px;
+  }
+  .puzzle-design-buy .puzzle-text {
+    top: -20px;
+  }
+  .cal-profit-header p {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+  .profite-report-content p {
+    font-size: 13px;
+  }
+  .cal-profit-header h4 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .profit-calculation-box {
+    padding: 30px;
+  }
+  .calculate-profite-report {
+    max-width: 100%;
+  }
+  .popular-datatable {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .popular-datatable table {
+    min-width: 750px;
+    width: 100%;
+    border-spacing: 0 10px;
+  }
+  .popular-datatable td {
+    font-size: 14px;
+  }
+  .popular-search input {
+    width: 100%;
+  }
+  .popular-search {
+    width: 100%;
+  }
+  .popular-grid {
+    justify-content: start !important;
+    flex-direction: column;
+    gap: 10px !important;
+  }
+  .custom-select-wrapper {
+    width: 100%;
+  }
+  .bcoinmart-earn-hero a {
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+  .earn-overview-img img {
+    width: 100%;
+  }
+
+  .coin-icon {
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+  }
+  .crypto-price h5 {
+    font-size: 16px;
+  }
+  .crypto-price p {
+    font-size: 14px;
+  }
+  .crypto-price {
+    text-align: start;
+  }
+  .market-tabs a {
+    font-size: 14px;
+  }
+  .mt-60 {
+    margin-top: 30px;
+  }
+  #tradingChart {
+    height: 340px !important;
+  }
+
+  .mb-60 {
+    margin-bottom: 30px;
+  }
+  .market-tabs ul {
+    gap: 14px;
+  }
+
+  .btn-trade {
+    font-weight: 300;
+    font-size: 14px;
+  }
+  .footer-logo {
+    margin-bottom: 40px;
+  }
+  /* rakib css start  */
+  .learning-hub-card-info {
+    padding: 15px;
+  }
+  .learning-hub-card-info p {
+    font-size: 17px;
+  }
+  .learning-hub-card {
+    max-width: 400px;
+    margin: auto;
+  }
+
+  .puzzle-text {
+    padding-left: 35px;
+  }
+  .shape-main {
+    background-size: cover;
+  }
+  .system-info ul {
+    gap: 30px;
+    margin-top: 20px;
+  }
+  .qr-code {
+    max-width: 125px;
+  }
+  .common-heading-section h2 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+  .process-card {
+    padding: 30px 15px;
+  }
+
+  .bitcoin-market-chart-title h5 {
+    font-size: 20px;
+  }
+  .bitcoin-market-chart-title span {
+    font-size: 20px;
+  }
+  .bitcoin-market-chart-title > ul {
+    gap: 8px;
+  }
+  .bitcoin-markets-card {
+    margin-top: 30px;
+  }
+  .bitcoin-market-logo img {
+    width: 22px;
+  }
+  .payment-select span {
+    font-size: 14px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+    padding-top: 20px;
+  }
+  .footer-menu-title {
+    font-size: 22px;
+    padding-bottom: 30px;
+  }
+  .footer-menu-title::after {
+    bottom: 21px;
+  }
+  .footer-menu-link {
+    font-size: 15px;
+  }
+  .social-icon-main {
+    gap: 10px;
+  }
+  .social-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+  .sign-up-box-cover p {
+    width: 100%;
+    text-align: center;
+  }
+  .common-heading-section h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .hero-circle-area {
+    flex-wrap: wrap;
+  }
+  /* .hero-circle-area {
+    display: none;
+  } */
+  .hero-section {
+    padding-bottom: 40px;
+  }
+  .coin-info-table tr td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+  .coin-info-table .graph img {
+    width: 38px;
+  }
+  .custom-card {
+    flex: 0 0 100%;
+    margin-left: 0 !important;
+  }
+  .clip-card-2 {
+    padding-left: 85px;
+  }
+  .custom-card h5 {
+    margin-bottom: 20px;
+  }
+  .icon img {
+    max-width: 45px;
+  }
+  .shape-section {
+    padding-top: 66px;
+  }
+  .shape-header {
+    padding-bottom: 42px;
+  }
+  .shape-main .common-heading-section {
+    padding-bottom: 45px;
+  }
+  .faq-image img {
+    width: 100%;
+    max-height: 600px;
+    background-size: cover;
+  }
+  .accordion-number {
+    display: none;
+  }
+  .accordion-button {
+    padding-left: 12px;
+    font-size: 20px;
+    height: 100px;
+  }
+  .accordion-icon {
+    width: 54px !important;
+    flex: 0 0 54px !important;
+  }
+  .accordion-body {
+    padding: 15px 24px 24px 24px !important;
+  }
+  .subtraction-icon,
+  .addition-icon {
+    width: 16px;
+  }
+  .faq-section {
+    padding-bottom: 56px;
+    padding-top: 121px;
+  }
+  .shape-main {
+    padding: 60px 0 91px 0;
+    clip-path: none;
+  }
+  .navbar-brand {
+    max-width: 160px;
+    width: 100%;
+  }
+  .accordion-opportunity .accordion-date {
+    padding-top: 10px;
+  }
+  .accordion-opportunity .accordion-button {
+    padding-right: 70px !important;
+  }
+  .accordion-opportunity .accordion-date {
+    font-size: 12px;
+  }
+  .opportunities-btn-row a {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .stat-label {
+    color: #808080;
+    margin-bottom: 2px;
+    font-size: 12px;
+    line-height: 17px;
+  }
+  .stats-row {
+    gap: 9px;
+  }
+  .stat-badge {
+    font-size: 12px;
+  }
+  .roi-label p {
+    font-size: 12px;
+  }
+  .user-details-name {
+    font-size: 16px;
+    line-height: 15px;
+  }
+  .profit-value {
+    font-size: 18px;
+    line-height: 20px;
+  }
+  .avatar img {
+    width: 50px;
+    height: 50px;
+  }
+  .p2p-tabs-area .owl-stage {
+    display: flex;
+    align-items: center;
+  }
+  .p2p-tabs-area .tabs-slide .owl-prev,
+  .p2p-tabs-area .tabs-slide .owl-next {
+    top: 6px;
+  }
+  .learning-hub-card-info span {
+    margin-bottom: 10px;
+  }
+  .auto-signup ul li img {
+    width: 14px;
+  }
+  .auto-signup {
+    padding: 8px;
+    border-radius: 3px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .accordion-bcoinmart .accordion-button {
+    font-size: 14px;
+    padding: 20px !important;
+    line-height: 23px;
+    font-weight: 400;
+  }
+  .common-heading-section.affiliate-hero h2 {
+    font-size: 34px;
+    line-height: 55px;
+  }
+  .buy-sell-input .btn.custom-select-token {
+    padding: 6px 10px !important;
+  }
+  .buy-sell-price-select {
+    width: 92% !important;
+  }
+
+  .buy-sell-search-box {
+    flex-direction: column;
+    width: 100%;
+  }
+  .buy-sell-select-normal,
+  .buy-sell-input {
+    width: 100% !important;
+  }
+  .buy-sell-price-reload {
+    width: 100%;
+  }
+  .buy-trasection-search-flex {
+    gap: 10px;
+  }
+  .signup-content h3 {
+    font-size: 22px;
+    line-height: 24px;
+  }
+  input::placeholder {
+    font-size: 10px !important;
+  }
+  .form-input input::placeholder {
+    font-size: 10px !important;
+  }
+
+  .puzzle-design-card {
+    flex: 0 0 100%;
+  }
+  .common-heading-section h2 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .custom-card h5 {
+    font-size: 16px;
+  }
+  .custom-card p {
+    font-size: 14px;
+  }
+  .doc-text-content {
+    font-size: 14px;
+  }
+  .doc-text-title {
+    font-size: 16px;
+  }
+  .accordion-bcoinmart .accordion-body {
+    padding: 20px !important;
+  }
+  .bcoinmart-accordion-body {
+    font-size: 14px;
+  }
+  .border-gradient-2 {
+    margin-bottom: 5px;
+  }
+  .learning-hub-card-info p {
+    font-size: 16px;
+  }
+  .footer-menu-title::after {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 13px;
+  }
+  .puzzle-design-shape-2 .puzzle-text {
+    padding-left: 100px;
+  }
+  .puzzle-design-buy .puzzle-text {
+    top: 0;
+  }
+  .shap-title {
+    font-size: 18px;
+  }
+  .puzzle-design-card h5 {
+    margin-bottom: 5px;
+  }
+  .shap-content {
+    line-height: 24px;
+  }
+  .puzzle-design-shape-2 .puzzle-text {
+    padding-left: 106px !important;
+  }
+  .footer-menu-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .social-icon-main {
+    justify-content: center;
+  }
+  .footer-privacy {
+    margin: 0 auto;
+  }
+  /* payment  */
+  #sell-tab {
+    transform: translate(-3.1px, 7.5px);
+    padding: 9px 14px !important;
+  }
+  #buy-tab {
+    transform: translate(2.5px, 6.5px);
+    padding: 9px 14px !important;
+  }
+  .buy-sel-tabs .form-label {
+    margin-bottom: 5px;
+  }
+  .buy-sel-tabs .nav-tabs .nav-link.active {
+    margin-top: 5px;
+  }
+  .buy-sel-tabs .form-control,
+  .form-label {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .buy-sel-tabs {
+    max-width: 342px;
+    padding-top: 40px;
+  }
+  .btn.custom-select-token.dropdown-toggle.select-token.payment-select,
+  .payment-dropdown-select .payment-select {
+    padding: 10px 15px;
+  }
+  .dropdown-buy-sell .custom-select-token {
+    gap: 2px;
+    padding: 4px 6px;
+  }
+  .buy-sel-tabs .nav-tabs .nav-link.active {
+    margin-left: 0px;
+  }
+  .reference-text {
+    font-size: 12px;
+    margin-bottom: 7px;
+  }
+  .secondary-btn,
+  .primary-btn {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  .payment {
+    margin: 20px 0 20px 0;
+  }
+  #buySellTabContent {
+    padding: 34px 20px;
+  }
+  .dropdown-buy-sell .custom-select-token {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  .dropdown-buy-sell .custom-select-token img {
+    width: 16px;
+    height: 16px;
+  }
+  .dropdown-buy-sell {
+    max-width: 102px;
+  }
+  .select-token::before {
+    height: 9px;
+    width: 9px;
+  }
+  .payment-dropdown-select .select-token::before {
+    top: 22px;
+  }
+  .accordion-opportunity .accordion-button {
+    padding-right: 50px !important;
+  }
+  .accordion-body .primary-btn {
+    padding: 6px 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .accordion-opportunity .accordion-button::after {
+    right: 14px;
+  }
+
+  .custom-mega-dropdown {
+    width: 100vw;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .bcoinmart-accordion-body {
+    font-size: 12px;
+    padding-top: 0;
+  }
+
+  .signup-content {
+    padding: 15px 0;
+  }
+  .calculate-child label {
+    font-size: 12px;
+  }
+
+  .sign-up-box .primary-btn-sm {
+    padding: 10px 15px;
+  }
+  .search-icon span {
+    height: 40px;
+    width: 40px;
+  }
+  .coin-pair-info p,
+  .coin-pair-info ul li {
+    font-size: 15px;
+  }
+  .pair-icon ul li img {
+    width: 30px;
+  }
+  .clip-card-2 {
+    padding-left: 65px;
+  }
+  table.market-overview-table tr td {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .p2p-how-works-title {
+    flex-direction: column;
+    justify-content: left !important;
+    text-align: left;
+    align-items: flex-start !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .calculate-child label {
+    font-size: 11px;
+  }
+}
