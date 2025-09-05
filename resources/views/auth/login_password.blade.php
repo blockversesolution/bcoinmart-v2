@@ -12,7 +12,13 @@
                     <div class="signup-content">
                         <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <h3>Enter your password</h3>
-                        <p class="verify-text mb-30">{{$email ?? $phone}}</p>
+                        <p class="verify-text mb-30">
+                            @if(isset($email))
+                                {{ substr($email,0,1) . '*****' . strstr($email, '@') }}
+                            @elseif(isset($phone))
+                                {{ substr($phone,0,5) . '*****' . substr($phone,-3) }}
+                            @endif
+                        </p>
                         <form action="{{route('login.confirm')}}" class="signup-form mb-30" method="POST">
                             @csrf
                             <div class="form-input mb-40">
@@ -30,7 +36,7 @@
                             </div>
                             <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
                         </form>
-                        <p class="sign-or-login"><a href="reset-password.html">Forgot password?</a></p>
+                        <p class="sign-or-login"><a href="{{route('password.request')}}">Forgot password?</a></p>
                     </div>
                 </div>
             </div>

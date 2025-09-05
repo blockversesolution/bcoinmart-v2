@@ -32,7 +32,7 @@
                                 <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/telegram.png" alt=""></a></li>
                             </ul>
                         </div>
-                        <p class="sign-or-login"><a href="#">Sign up as an entity</a> or <a href="sign-in.html">Log in</a></p>
+                        <p class="sign-or-login"><a href="#">Sign up as an entity</a> or <a href="{{route('login')}}">Log in</a></p>
                     </div>
                 </div>
             </div>
