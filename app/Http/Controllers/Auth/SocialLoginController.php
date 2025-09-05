@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SocialLoginController extends Controller
 {
@@ -31,7 +32,7 @@ class SocialLoginController extends Controller
         );
 
         Auth::login($user);
-
+        Alert::success('Success', 'Logged in successfully via ' . ucfirst($provider) . '.');
         return redirect()->route('dashboard');
     }
 }
