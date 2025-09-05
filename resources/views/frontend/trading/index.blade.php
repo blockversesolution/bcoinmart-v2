@@ -56,102 +56,140 @@
 
     <script>
         $(document).ready(function() {
-            // Ensure the canvas element exists before creating the chart
+            // Trading chart - only initialize if canvas exists
             const canvasElement = document.getElementById("tradingChart");
-            if (!canvasElement) {
-                console.error("Canvas element with ID 'tradingChart' not found");
-                return;
-            }
+            if (canvasElement) {
+                const tradingCtx = canvasElement.getContext("2d");
+                const isMobile = window.innerWidth < 991;
+                const barWidth = isMobile ? 26 : 60;
 
-            // Trading chart
-            const tradingCtx = canvasElement.getContext("2d");
-            const isMobile = window.innerWidth < 991;
-            const barWidth = isMobile ? 26 : 60;
-
-            const data = {
-                labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
-                datasets: [
-                    {
-                        label: "",
-                        data: [2, 10, 6, 9, 7, 11],
-                        backgroundColor: "#5c5f66",
-                        borderRadius: 2,
-                        barThickness: barWidth,
-                    },
-                ],
-            };
-
-            const config = {
-                type: "bar",
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            top: 20,
-                            bottom: 10,
+                const data = {
+                    labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
+                    datasets: [
+                        {
+                            label: "",
+                            data: [2, 10, 6, 9, 7, 11],
+                            backgroundColor: "#5c5f66",
+                            borderRadius: 2,
+                            barThickness: barWidth,
                         },
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                color: "#ccc",
-                                callback: function (value, index) {
-                                    return this.getLabelForValue(index);
+                    ],
+                };
+
+                const config = {
+                    type: "bar",
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: {
+                                top: 20,
+                                bottom: 10,
+                            },
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: "#ccc",
+                                    callback: function (value, index) {
+                                        return this.getLabelForValue(index);
+                                    },
+                                },
+                                grid: {
+                                    display: false,
                                 },
                             },
-                            grid: {
+                            y: {
+                                position: "right",
+                                ticks: {
+                                    color: "#aaa",
+                                    callback: () => "10.52K",
+                                },
+                                grid: {
+                                    color: "#333",
+                                },
+                            },
+                        },
+                        plugins: {
+                            legend: {
                                 display: false,
                             },
-                        },
-                        y: {
-                            position: "right",
-                            ticks: {
-                                color: "#aaa",
-                                callback: () => "10.52K",
-                            },
-                            grid: {
-                                color: "#333",
+                            tooltip: {
+                                backgroundColor: "#1A1D29",
+                                borderColor: "#FF4D4D",
+                                borderWidth: 1,
                             },
                         },
                     },
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                        tooltip: {
-                            backgroundColor: "#1A1D29",
-                            borderColor: "#FF4D4D",
-                            borderWidth: 1,
-                        },
+                };
+
+                new Chart(tradingCtx, config);
+            }
+
+            // Sparkline chart function with existence check
+            window.renderSparkline = function(canvasId, data, color) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) {
+                    console.warn(`Canvas element with ID '${canvasId}' not found`);
+                    return;
+                }
+
+                const ctx = canvas.getContext("2d");
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: data.map((_, i) => i),
+                        datasets: [{
+                            data: data,
+                            borderColor: color,
+                            backgroundColor: color + "20",
+                            borderWidth: 2,
+                            fill: true,
+                            pointRadius: 0,
+                            tension: 0.4
+                        }]
                     },
-                },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            x: { display: false },
+                            y: { display: false }
+                        },
+                        interaction: {
+                            intersect: false
+                        }
+                    }
+                });
             };
 
-            new Chart(tradingCtx, config);
-
-            // DataTable initialization
-            $(".cryptoTable").DataTable({
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: true,
-                responsive: true,
-                autoWidth: false,
-                responsive: {
-                    details: {
-                        type: "column",
-                        target: "tr",
+            // DataTable initialization - only if table exists
+            if ($(".cryptoTable").length) {
+                $(".cryptoTable").DataTable({
+                    paging: false,
+                    searching: false,
+                    info: false,
+                    ordering: true,
+                    responsive: true,
+                    autoWidth: false,
+                    responsive: {
+                        details: {
+                            type: "column",
+                            target: "tr",
+                        },
                     },
-                },
-                columnDefs: [
-                    { responsivePriority: 1, targets: 0 },
-                    { responsivePriority: 2, targets: -1 },
-                ],
-            });
+                    columnDefs: [
+                        { responsivePriority: 1, targets: 0 },
+                        { responsivePriority: 2, targets: -1 },
+                    ],
+                });
+            }
 
-            // Market marquee functionality
+            // Market marquee functionality - only if elements exist
             const marqueeElement = document.getElementById("marquee");
             const contentElement = document.querySelector(".marquee-content");
 
@@ -164,14 +202,28 @@
                     contentElement.style.animationPlayState = "running";
                 });
             }
+
+            // Initialize sparklines only if canvas elements exist
+            const sparklineCanvases = document.querySelectorAll('canvas[id*="sparkline"]');
+            if (sparklineCanvases.length > 0) {
+                // Example sparkline data - replace with your actual data
+                const sampleData = [10, 15, 8, 20, 12, 18, 14];
+
+                sparklineCanvases.forEach((canvas, index) => {
+                    if (canvas.id) {
+                        renderSparkline(canvas.id, sampleData, '#00ff88');
+                    }
+                });
+            }
         });
 
-        // Window resize event
+        // Rest of your existing code...
         $(window).on("resize", function () {
-            $(".cryptoTable").DataTable().columns.adjust().responsive.recalc();
+            if ($(".cryptoTable").length && $.fn.DataTable.isDataTable(".cryptoTable")) {
+                $(".cryptoTable").DataTable().columns.adjust().responsive.recalc();
+            }
         });
 
-        // Market search functionality
         $(document).on("click", ".market-search-button", function (e) {
             const $input = $(this)
                 .closest(".market-search-box")
@@ -188,11 +240,10 @@
             }
         });
 
-        // Dropdown functionality
         document.addEventListener("DOMContentLoaded", function() {
-            document
-                .querySelectorAll(".dropdown-custom .dropdown-menu .dropdown-item")
-                .forEach((item) => {
+            const dropdownItems = document.querySelectorAll(".dropdown-custom .dropdown-menu .dropdown-item");
+            if (dropdownItems.length) {
+                dropdownItems.forEach((item) => {
                     item.addEventListener("click", function (e) {
                         e.preventDefault();
 
@@ -207,16 +258,17 @@
                         }
                     });
                 });
+            }
 
-            // Initialize tooltips
-            const tooltipTriggerList = [].slice.call(
-                document.querySelectorAll('[data-bs-toggle="tooltip"]')
-            );
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl);
-            });
+            if (typeof bootstrap !== 'undefined') {
+                const tooltipTriggerList = [].slice.call(
+                    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+                );
+                tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                    new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
 
-            // Initialize AOS if available
             if (typeof AOS !== 'undefined') {
                 AOS.init();
             }
