@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -47,12 +48,14 @@ class RegisteredUserController extends Controller
         if ($email) {
             $exists = User::where('email', $email)->exists();
             if ($exists) {
+                Alert::warning('Warning', 'An account with this email already exists. Please log in instead.');
                 return back();
             }
         }
         if ($phone) {
             $exists = User::where('phone', $phone)->exists();
             if ($exists) {
+                Alert::warning('Warning', 'An account with this email already exists. Please log in instead.');
                 return back();
             }
         }
@@ -62,12 +65,14 @@ class RegisteredUserController extends Controller
             ['contact_info' => $request->contact_info],
             [
                 'contact_info' => $request->contact_info,
-                'is_agreed' => $request->has('is_agreed') ? 1 : 0,]
+                'is_agreed' => $request->has('is_agreed') ? 1 : 0,
+                'code' => rand(100000, 999999)
+            ]
         );
 
         $request->session()->put('register_email', $email);
         $request->session()->put('register_phone', $phone);
-
+        Alert::success('Success', 'Your otp sent to your registered email address or phone number.');
         return redirect()->route('register.verification');
     }
 
@@ -92,7 +97,6 @@ class RegisteredUserController extends Controller
 //            ->where('code', $request->code)
 //            ->first();
 //        if (!$tempUser) {
-//            Toastr::error('Invalid verification code', 'Error', ["positionClass" => "toast-top-right"]);
 //            return redirect()->route('register.verification', ['email' => $request->email, 'phone' => $request->phone]);
 //        }
         return redirect()->route('register.password.set');
@@ -130,11 +134,9 @@ class RegisteredUserController extends Controller
         ]);
 
         TempUser::where('contact_info', $request->email ?? $request->phone)->delete();
-
-        event(new Registered($user));
+        Alert::success('Success', 'Registration Successful');
         Auth::login($user);
         return redirect()->route('dashboard');
-
     }
 
 }

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @include('frontend.includes.candle_animation')
 <!-- Header Start-->
 @include('frontend.includes.layouts.header')

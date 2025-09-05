@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -37,7 +38,8 @@ class LoginController extends Controller
             $email = $request->contact_info;
             $user = User::where('email', $email)->first();
             if (!$user){
-                return redirect()->back();
+                Alert::error('Error', 'No account found with this email.');
+                return back();
             }
         }
         if (preg_match("/^\+?[0-9]{10,15}$/", $request->contact_info)) {
@@ -45,7 +47,8 @@ class LoginController extends Controller
             $phone = $request->contact_info;
             $user = User::where('phone', $phone)->first();
             if (!$user){
-                return redirect()->back();
+                Alert::error('Error', 'No account found with this phone number.');
+                return back();
             }
         }
         $request->session()->put('email', $email);
@@ -84,6 +87,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $request->session()->forget(['email', 'phone']);
+            Alert::success('Success', 'Login successful');
             return redirect()->intended(route('dashboard', absolute: false));
         }
         return redirect()->back();
