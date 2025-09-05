@@ -35,7 +35,10 @@
 </head>
 
 <body>
-@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+@if (session()->has('alert.config'))
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+    @php(session()->forget('alert.config'))
+@endif
 
 <!-- start sign up area  -->
 @yield('content')
