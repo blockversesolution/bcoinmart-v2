@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <p style="margin: 0 0 20px 0; font-size: 16px; color: #333333;">This code is valid for the next <strong>10 minutes</strong>. Please do not share this code with anyone.</p>
+            <p style="margin: 0 0 20px 0; font-size: 16px; color: #333333;">This code is valid for the next <strong>1 minutes</strong>. Please do not share this code with anyone.</p>
             <p style="margin: 0 0 20px 0; font-size: 16px; color: #666666;">If you did not request this code, please ignore this email or contact our support team immediately.</p>
         </td>
     </tr>

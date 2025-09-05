@@ -154,7 +154,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Futures</a>
+                            <a class="nav-link" href="{{route('frontend.page.maintenance')}}">Futures</a>
                         </li>
                         <li class="nav-item dropdown">
 

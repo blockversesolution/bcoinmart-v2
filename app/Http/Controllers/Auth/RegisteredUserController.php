@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
         if ($phone) {
             $exists = User::where('phone', $phone)->exists();
             if ($exists) {
-                Alert::warning('Warning', 'An account with this email already exists. Please log in instead.');
+                Alert::warning('Warning', 'An account with this phone already exists. Please log in instead.');
                 return back();
             }
         }
@@ -108,35 +108,35 @@ class RegisteredUserController extends Controller
         ]);
 
 
-//        $tempUser = TempUser::where('contact_info', $request->email ?? $request->phone)
-//            ->where('code', $request->code)
-//            ->first();
-//        if (!$tempUser) {
-//            Alert::warning('Warning', 'Invalid OTP');
-//            return redirect()->route('register.verification');
-//        }
+        $tempUser = TempUser::where('contact_info', $request->email ?? $request->phone)
+            ->where('code', $request->code)
+            ->first();
+        if (!$tempUser) {
+            Alert::warning('Warning', 'Invalid OTP');
+            return redirect()->route('register.verification');
+        }
 
-//        if (!$tempUser->created_at || $tempUser->created_at->lt(now()->subMinutes(10))) {
-//            $tempUser->update([
-//                'code' => rand(100000, 999999),
-//                'created_at' => now()
-//            ]);
-//
-//            if ($request->email){
-//                OTPVerificationMailJob::dispatch(
-//                    $request->email,
-//                    'Your Email Verification Code',
-//                    '\App\Mail\RegistrationVerificationMail',
-//                    'mail.registration_verification_mail',
-//                    [
-//                        'code' => $tempUser->code,
-//                    ]
-//                );
-//            }
-//
-//            Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
-//            return redirect()->route('register.verification');
-//        }
+        if (!$tempUser->created_at || $tempUser->created_at->lt(now()->subMinutes(1))) {
+            $tempUser->update([
+                'code' => rand(100000, 999999),
+                'created_at' => now()
+            ]);
+
+            if ($request->email){
+                OTPVerificationMailJob::dispatch(
+                    $request->email,
+                    'Your Email Verification Code',
+                    '\App\Mail\RegistrationVerificationMail',
+                    'mail.registration_verification_mail',
+                    [
+                        'code' => $tempUser->code,
+                    ]
+                );
+            }
+
+            Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
+            return redirect()->route('register.verification');
+        }
 
         return redirect()->route('register.password.set');
 

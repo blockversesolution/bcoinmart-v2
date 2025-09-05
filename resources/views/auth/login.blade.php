@@ -31,9 +31,9 @@
                         <p class="sign-up-or">or</p>
                         <div class="sing-up-social">
                             <ul>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/google.png" alt=""></a></li>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/apple.png" alt=""></a></li>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/telegram.png" alt=""></a></li>
+                                <li><a href="{{route('social.redirect',['provider' => 'google'])}}"><img src="{{asset('frontend')}}/assets/images/sign-up/google.png" alt=""></a></li>
+                                <li><a href="{{route('social.redirect',['provider' => 'apple'])}}"><img src="{{asset('frontend')}}/assets/images/sign-up/apple.png" alt=""></a></li>
+                                <li><a href="{{route('social.redirect',['provider' => 'telegram'])}}"><img src="{{asset('frontend')}}/assets/images/sign-up/telegram.png" alt=""></a></li>
                             </ul>
                         </div>
                         <p class="sign-or-login"><a href="{{route('register')}}">Create a Account</a></p>
