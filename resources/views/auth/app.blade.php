@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/play-animation.css" />
 
     <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/responsive.css" />
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 
 </head>
@@ -52,8 +51,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="{{asset('frontend')}}/assets/js/main.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-{!! Toastr::message() !!}
+
 
 @stack('js')
 </body>
