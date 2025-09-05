@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +17,8 @@ class LoginController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $data['page_title'] = 'Login';
+        return view('auth.login', $data);
     }
 
     /**
@@ -29,13 +29,14 @@ class LoginController extends Controller
         $request->validate([
             'contact_info' => ['required', 'string'],
         ]);
+        $request->session()->forget('email');
+        $request->session()->forget('phone');
         $email = null;
         $phone = null;
         if (filter_var($request->contact_info, FILTER_VALIDATE_EMAIL)) {
             $email = $request->contact_info;
             $user = User::where('email', $email)->first();
             if (!$user){
-                Toastr::warning('Invalid email', 'Error', ["positionClass" => "toast-top-right"]);
                 return redirect()->back();
             }
         }
@@ -44,7 +45,6 @@ class LoginController extends Controller
             $phone = $request->contact_info;
             $user = User::where('phone', $phone)->first();
             if (!$user){
-                Toastr::warning('Invalid phone number', 'Error', ["positionClass" => "toast-top-right"]);
                 return redirect()->back();
             }
         }
@@ -84,10 +84,8 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $request->session()->forget(['email', 'phone']);
-            Toastr::success('You are logged in successfully', 'Success', ["positionClass" => "toast-top-right"]);
             return redirect()->intended(route('dashboard', absolute: false));
         }
-        Toastr::error('The provided credentials do not match our records.', 'Error', ["positionClass" => "toast-top-right"]);
         return redirect()->back();
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\TempUser;
 use App\Models\User;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,6 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'contact_info' => ['required', 'string', 'max:255'],
+            'is_agreed' => ['accepted'],
         ]);
         $email = null;
         $phone = null;
@@ -47,14 +47,12 @@ class RegisteredUserController extends Controller
         if ($email) {
             $exists = User::where('email', $email)->exists();
             if ($exists) {
-                Toastr::warning('This email all ready exists', 'Warning', ["positionClass" => "toast-top-right"]);
                 return back();
             }
         }
         if ($phone) {
             $exists = User::where('phone', $phone)->exists();
             if ($exists) {
-                Toastr::warning('This phone no all ready exists', 'Warning', ["positionClass" => "toast-top-right"]);
                 return back();
             }
         }
@@ -62,21 +60,22 @@ class RegisteredUserController extends Controller
 
         $tempUser = TempUser::updateOrCreate(
             ['contact_info' => $request->contact_info],
-            ['contact_info' => $request->contact_info]
+            [
+                'contact_info' => $request->contact_info,
+                'is_agreed' => $request->has('is_agreed') ? 1 : 0,]
         );
 
         $request->session()->put('register_email', $email);
         $request->session()->put('register_phone', $phone);
 
-        Toastr::success('We have sent you a verification code, Please check your email or phone', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('register.verification');
     }
 
     public function verification(Request $request)
     {
         $data['page_title'] = "Registration Verification";
-       $data['email'] = $request->session()->get('register_email');
-       $data['phone'] = $request->session()->get('register_phone');
+        $data['email'] = $request->session()->get('register_email');
+        $data['phone'] = $request->session()->get('register_phone');
         return view('auth.register_verification', $data);
     }
 
@@ -96,7 +95,6 @@ class RegisteredUserController extends Controller
 //            Toastr::error('Invalid verification code', 'Error', ["positionClass" => "toast-top-right"]);
 //            return redirect()->route('register.verification', ['email' => $request->email, 'phone' => $request->phone]);
 //        }
-        Toastr::success('Verification successful, Please set your password', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('register.password.set');
 
     }
@@ -128,11 +126,13 @@ class RegisteredUserController extends Controller
             'email' => $request->email ?? '',
             'phone' => $request->phone ?? '',
             'password' => Hash::make($request->password),
+            'is_agreed' => 1
         ]);
+
+        TempUser::where('contact_info', $request->email ?? $request->phone)->delete();
 
         event(new Registered($user));
         Auth::login($user);
-        Toastr::success('Registration successful', 'Success', ["positionClass" => "toast-top-right"]);
         return redirect()->route('dashboard');
 
     }

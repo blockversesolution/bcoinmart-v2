@@ -22,7 +22,10 @@
                             @csrf
                             <div class="form-input mb-40">
                                 <label for="email-input">Verification Code</label>
-                                <input type="text" name="code" id="email-input" placeholder="Enter your code">
+                                <input type="text" name="code" id="email-input" class="@error('code') is-invalid @enderror" placeholder="Enter your code">
+                                @error('code')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                                 <input type="hidden" name="email" value="{{$email}}" id="email-input" placeholder="Enter your code">
                                 <input type="hidden" name="phone" value="{{$phone}}" id="email-input" placeholder="Enter your code">
                             </div>

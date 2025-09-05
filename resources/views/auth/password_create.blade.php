@@ -17,7 +17,10 @@
                             <div class="form-input mb-40">
                                 <label for=" ">Password</label>
                                 <div class="password-wrapper">
-                                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                                    <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror" placeholder="Enter your password">
+                                    @error('password')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                     <input type="hidden" id="" name="email" value="{{$email}}" placeholder="Enter your password">
                                     <input type="hidden" id="" name="phone" value="{{$phone}}" placeholder="Enter your password">
                                     <span id="togglePassword" class="eye-icon">

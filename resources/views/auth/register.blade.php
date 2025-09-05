@@ -16,23 +16,43 @@
                             @csrf
                             <div class="form-input">
                                 <label for="email-input">Email/Phone Number</label>
-                                <input type="text" id="email-input" name="contact_info" placeholder="Enter email or phone number ( With country code)">
+                                <input type="text" id="email-input" name="contact_info"
+                                       placeholder="Enter email or phone number ( With country code)">
                             </div>
-                            <div class="form-input checkbox-input">
-                                <input type="checkbox" name="" id="sign-check" required>
-                                <label for="sign-check">By creating an account, I agree to BcoinMart's <a href="#">Terms of Service</a> and <a href="#">Privacy Notice</a>.</label>
+                            <div class="form-input checkbox-input flex items-center gap-2">
+                                <input type="checkbox"
+                                       name="is_agreed"
+                                       id="sign-check"
+                                       class="@error('is_agreed') is-invalid @enderror">
+
+                                <div class="flex flex-col">
+                                    <label for="sign-check" class="m-0">
+                                        By creating an account, I agree to BcoinMart's
+                                        <a href="#">Terms of Service</a> and
+                                        <a href="#">Privacy Notice</a>.
+                                    </label>
+
+                                    @error('is_agreed')
+                                    <span class="text-danger text-sm mt-0.5">You must agree to the terms</span>
+                                    @enderror
+                                </div>
                             </div>
-                            <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
+                            <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next
+                            </button>
                         </form>
                         <p class="sign-up-or">or</p>
                         <div class="sing-up-social">
                             <ul>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/google.png" alt=""></a></li>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/apple.png" alt=""></a></li>
-                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/telegram.png" alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/google.png"
+                                                     alt=""></a></li>
+                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/apple.png" alt=""></a>
+                                </li>
+                                <li><a href="#"><img src="{{asset('frontend')}}/assets/images/sign-up/telegram.png"
+                                                     alt=""></a></li>
                             </ul>
                         </div>
-                        <p class="sign-or-login"><a href="#">Sign up as an entity</a> or <a href="{{route('login')}}">Log in</a></p>
+                        <p class="sign-or-login"><a href="{{route('register')}}">Sign up as an entity</a> or <a
+                                href="{{route('login')}}">Log in</a></p>
                     </div>
                 </div>
             </div>

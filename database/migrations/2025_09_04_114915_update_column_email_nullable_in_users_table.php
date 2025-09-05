@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('email')->nullable()->change();
+            $table->dropUnique(['email']);
             $table->string('name')->nullable()->change();
         });
     }
@@ -24,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('email')->nullable(false)->change();
+            $table->unique('email');
             $table->string('name')->nullable(false)->change();
         });
     }

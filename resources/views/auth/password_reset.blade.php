@@ -33,7 +33,7 @@
                                     <li><p class="text-type-gray d-flex gap-2 align-items-center"> <i class="fa-solid fa-check"></i> At least 1 upper case letter</p></li>
                                 </ul>
                             </div>
-                            <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
+                            <button type="submit" class="primary-btn w-100 text-center justify-content-center">Reset Password</button>
                         </form>
                     </div>
                 </div>

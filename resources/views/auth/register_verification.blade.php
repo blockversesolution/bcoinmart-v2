@@ -12,7 +12,12 @@
                     <div class="signup-content">
                         <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <h3>Verify your email</h3>
-                        <p class="verify-text mb-30">A 6-digit code has been sent to yourmail@gmail.com. Please enter it within the next 1 minutes.</p>
+                        <p class="verify-text mb-30">A 6-digit code has been sent to
+                            @if(isset($email))
+                                {{ substr($email,0,1) . '*****' . strstr($email, '@') }}
+                            @elseif(isset($phone))
+                                {{ substr($phone,0,5) . '*****' . substr($phone,-3) }}
+                            @endif. Please enter it within the next 1 minutes.</p>
                         <form action="{{route('register.otp.check')}}" class="signup-form mb-30" method="POST">
                             @csrf
                             <div class="form-input mb-40">

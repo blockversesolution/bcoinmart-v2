@@ -21,7 +21,10 @@
                             @csrf
                             <div class="form-input mb-40">
                                 <label for="email-input">Email/Phone Number</label>
-                                <input type="text" id="email-input" name="contact_info" placeholder="Enter email or phone number ( With country code)">
+                                <input type="text" id="email-input" name="contact_info" class="@error('contact_info') is-invalid @enderror" placeholder="Enter email or phone number ( With country code)">
+                                @error('contact_info')
+                                    <span class="text-danger">Please provide your login email or phone</span>
+                                @enderror
                             </div>
                             <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
                         </form>
