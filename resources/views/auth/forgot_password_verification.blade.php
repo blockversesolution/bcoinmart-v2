@@ -24,14 +24,14 @@
                                 <label for="email-input">Verification Code</label>
                                 <input type="text" name="code" id="email-input" class="@error('code') is-invalid @enderror" placeholder="Enter your code">
                                 @error('code')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">Otp is Invalid. Please try with correct Otp</span>
                                 @enderror
                                 <input type="hidden" name="email" value="{{$email}}" id="email-input" placeholder="Enter your code">
                                 <input type="hidden" name="phone" value="{{$phone}}" id="email-input" placeholder="Enter your code">
                             </div>
                             <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
                         </form>
-                        <p class="sign-or-login"><a href="#">Didn't receive the code?</a></p>
+                        <p class="sign-or-login"><a href="{{route('password.otp.resend')}}">Didn't receive the code?</a></p>
                     </div>
                 </div>
             </div>

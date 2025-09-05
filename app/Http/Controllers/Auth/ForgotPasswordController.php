@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\OTPVerificationMailJob;
+use App\Models\PasswordResetOtp;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ForgotPasswordController extends Controller
 {
@@ -36,25 +39,25 @@ class ForgotPasswordController extends Controller
             'password' => ['required', 'string', 'min:8', 'max:128'],
         ]);
         $user = null;
-       if ($request->phone != null) {
-           $user = User::where('phone', $request->phone)->first();
+        if ($request->phone != null) {
+            $user = User::where('phone', $request->phone)->first();
 
-       }
-       if ($request->email != null) {
-              $user = User::where('email', $request->email)->first();
-       }
+        }
+        if ($request->email != null) {
+            $user = User::where('email', $request->email)->first();
+        }
 
-       if (isset($user)) {
-              $user->password = Hash::make($request->password);
-              $user->save();
+        if (isset($user)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-              $request->session()->forget('email');
-              $request->session()->forget('phone');
-
-              return redirect('/login');
-         } else {
-              return back();
-       }
+            $request->session()->forget('email');
+            $request->session()->forget('phone');
+            Alert::success('Success', 'Your password has been reset successfully. You can now log in with your new password.');
+            return redirect('/login');
+        } else {
+            return back();
+        }
     }
 
     public function otpSend()
@@ -63,6 +66,41 @@ class ForgotPasswordController extends Controller
         $data['email'] = session('email');
         $data['phone'] = session('phone');
         // otp send code here
+
+        if ($data['email'] == null) {
+            $user = User::where('email', $data['email'])->first();
+            if (!isset($user)) {
+                Alert::warning('Warning', 'No account found with this email. Please try correct email.');
+                return redirect()->route('password.request');
+            }
+        }
+
+        if ($data['phone'] == null) {
+            $user = User::where('phone', $data['phone'])->first();
+            if (!isset($user)) {
+                Alert::warning('Warning', 'No account found with this phone. Please try correct phone.');
+                return redirect()->route('password.request');
+            }
+        }
+        PasswordResetOtp::where('contact_info', $data['email'] ?? $data['phone'])->delete();
+        $resetCode = PasswordResetOtp::create([
+            'contact_info' => $data['email'] ?? $data['phone'],
+            'code' => rand(100000, 999999),
+        ]);
+
+        if ($data['email']) {
+            OTPVerificationMailJob::dispatch(
+                $data['email'],
+                'Password Reset OTP',
+                'App\Mail\ResetPasswordOtpMail',
+                'mail.reset_password_mail',
+                ['code' => $resetCode->code]
+            );
+            Alert::success('Success', 'OTP has been sent to your email.');
+        } elseif ($data['phone']) {
+
+            Alert::success('Success', 'OTP has been sent to your phone.');
+        }
 
         return view('auth.forgot_password_verification', $data);
     }
@@ -75,9 +113,40 @@ class ForgotPasswordController extends Controller
             'code' => ['required', 'string'],
         ]);
         //check otp code here
-        return redirect()->route('password.reset.form')
-            ->with(['email' => $request->email, 'phone' => $request->phone]);
 
+//        $otpRecord = PasswordResetOtp::where('contact_info', $request->email ?? $request->phone)
+//            ->where('code', $request->code)
+//            ->first();
+//        if (!$otpRecord) {
+//            Alert::warning('Warning', 'Invalid OTP. Please try again.');
+//            return back();
+//        }
+//
+//        if ($otpRecord->created_at->lt(now()->subMinutes(1))) {
+//            $otpRecord->update([
+//                'code' => rand(100000, 999999),
+//                'created_at' => now()
+//            ]);
+//
+//            if ($request->email != null) {
+//                OtpVerificationMailJob::dispatch(
+//                    $request->email,
+//                    'Your Password Reset OTP',
+//                    '\App\Mail\ResetPasswordOtpMail',
+//                    'mail.reset_password_mail',
+//                    ['code' => $otpRecord->code]
+//                );
+//                Alert::success('Success', 'Your OTP has been sent to your email.');
+//                return back();
+//            }
+//            if ($request->phone != null) {
+//                // Send OTP to phone via SMS gateway
+//                Alert::success('Success', 'Your OTP has been sent to your phone.');
+//                return back();
+//            }
+//        }
+
+        return redirect()->route('password.reset.form');
     }
 
     public function showPasswordReset()
@@ -87,6 +156,31 @@ class ForgotPasswordController extends Controller
             'phone' => session('phone'),
             'page_title' => 'Reset Password',
         ]);
+    }
+
+    public function resendOtp(Request $request)
+    {
+        $email = session('email');
+        $phone = session('phone');
+        PasswordResetOtp::where('contact_info', $email ?? $phone)->delete();
+        $resetCode = PasswordResetOtp::create([
+            'contact_info' => $email ?? $phone,
+            'code' => rand(100000, 999999),
+        ]);
+        if ($email) {
+            OTPVerificationMailJob::dispatch(
+                $email,
+                'Password Reset OTP',
+                'App\Mail\ResetPasswordOtpMail',
+                'mail.reset_password_mail',
+                ['code' => $resetCode->code]
+            );
+            Alert::success('Success', 'OTP has been resent to your email.');
+        } elseif ($phone) {
+
+            Alert::success('Success', 'OTP has been resent to your phone.');
+        }
+        return back();
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\OTPVerificationMailJob;
 use App\Models\TempUser;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -51,6 +52,7 @@ class RegisteredUserController extends Controller
                 Alert::warning('Warning', 'An account with this email already exists. Please log in instead.');
                 return back();
             }
+
         }
         if ($phone) {
             $exists = User::where('phone', $phone)->exists();
@@ -72,6 +74,19 @@ class RegisteredUserController extends Controller
 
         $request->session()->put('register_email', $email);
         $request->session()->put('register_phone', $phone);
+
+        if ($email){
+            OTPVerificationMailJob::dispatch(
+                $email,
+                'Your Email Verification Code',
+                '\App\Mail\RegistrationVerificationMail',
+                'mail.registration_verification_mail',
+                [
+                    'code' => $tempUser->code,
+                ]
+            );
+        }
+
         Alert::success('Success', 'Your otp sent to your registered email address or phone number.');
         return redirect()->route('register.verification');
     }
@@ -97,8 +112,32 @@ class RegisteredUserController extends Controller
 //            ->where('code', $request->code)
 //            ->first();
 //        if (!$tempUser) {
-//            return redirect()->route('register.verification', ['email' => $request->email, 'phone' => $request->phone]);
+//            Alert::warning('Warning', 'Invalid OTP');
+//            return redirect()->route('register.verification');
 //        }
+
+//        if (!$tempUser->created_at || $tempUser->created_at->lt(now()->subMinutes(10))) {
+//            $tempUser->update([
+//                'code' => rand(100000, 999999),
+//                'created_at' => now()
+//            ]);
+//
+//            if ($request->email){
+//                OTPVerificationMailJob::dispatch(
+//                    $request->email,
+//                    'Your Email Verification Code',
+//                    '\App\Mail\RegistrationVerificationMail',
+//                    'mail.registration_verification_mail',
+//                    [
+//                        'code' => $tempUser->code,
+//                    ]
+//                );
+//            }
+//
+//            Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
+//            return redirect()->route('register.verification');
+//        }
+
         return redirect()->route('register.password.set');
 
     }
@@ -137,6 +176,51 @@ class RegisteredUserController extends Controller
         Alert::success('Success', 'Registration Successful');
         Auth::login($user);
         return redirect()->route('dashboard');
+    }
+
+    public function resendRegisterOTP(Request $request)
+    {
+        $email = $request->session()->get('register_email');
+        $phone = $request->session()->get('register_phone');
+
+        $contact_info = $email ?? $phone;
+
+        if (!$contact_info) {
+            Alert::warning('Warning', 'No contact information found. Please start the registration process again.');
+            return redirect()->route('register');
+        }
+
+        $tempUser = TempUser::where('contact_info', $contact_info)->first();
+
+        if (!$tempUser) {
+            $tempUser = TempUser::create([
+                'contact_info' => $contact_info,
+                'is_agreed' => 1,
+                'code' => rand(100000, 999999),
+                'created_at' => now()
+            ]);
+        } else {
+            $tempUser->update([
+                'code' => rand(100000, 999999),
+                'created_at' => now()
+            ]);
+        }
+
+        if ($email) {
+            OTPVerificationMailJob::dispatch(
+                $email,
+                'Your Email Verification Code',
+                '\App\Mail\RegistrationVerificationMail',
+                'mail.registration_verification_mail',
+                [
+                    'code' => $tempUser->code,
+                ]
+            );
+        }
+
+        Alert::success('Success', 'A new OTP has been sent to your registered contact information.');
+        return redirect()->route('register.verification');
+
     }
 
 }
