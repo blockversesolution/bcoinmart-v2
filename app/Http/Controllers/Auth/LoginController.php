@@ -158,10 +158,15 @@ class LoginController extends Controller
 
         if($google2fa->verifyKey($user->google2fa_secret, $request->otp)) {
             Auth::login($user);
+
+            session(['2fa_verified' => true]);
+
             session()->forget('2fa:user:id');
-            Alert::success('Success', '2fa verified');
-            return redirect()->route('dashboard');
+
+            Alert::success('Success', '2FA verified successfully');
+            return redirect()->intended(route('dashboard'));
         }
+
         Alert::error('Error', 'Invalid verification code.');
         return redirect()->back();
     }
