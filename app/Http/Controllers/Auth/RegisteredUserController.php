@@ -43,6 +43,12 @@ class RegisteredUserController extends Controller
 
         if (filter_var($request->contact_info, FILTER_VALIDATE_EMAIL)) {
             $email = $request->contact_info;
+
+            if (!isEmailValid($email)){
+                Alert::warning('Warning', 'Please provide a valid email address.');
+                return back();
+            }
+
         }
         if (preg_match("/^\+?[0-9]{10,15}$/", $request->contact_info)) {
             $phone = $request->contact_info;
