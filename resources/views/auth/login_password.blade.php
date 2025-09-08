@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="signup-content">
-                        <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
+                        <a class="sign-up-logo" href="{{url('/')}}"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <h3>Enter your password</h3>
                         <p class="verify-text mb-30">
                             @if(isset($email))
@@ -28,14 +28,13 @@
                                     @error('password')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
-                                    <input type="hidden" id="password" name="email" value="{{$email ?? ''}}" placeholder="Enter your password">
-                                    <input type="hidden" id="password" name="phone" value="{{$phone ?? ''}}" placeholder="Enter your password">
-
                                     <span id="togglePassword" class="eye-icon">
                                         <i class="fa-solid fa-eye" id="showIcon"></i>
                                         <i class="fa-solid fa-eye-slash" id="hideIcon" style="display: none;"></i>
                                     </span>
                                 </div>
+                                <input type="hidden" name="email" value="{{ $email ?? '' }}">
+                                <input type="hidden" name="phone" value="{{ $phone ?? '' }}">
                             </div>
                             <button type="submit" class="primary-btn w-100 text-center justify-content-center">Next</button>
                         </form>

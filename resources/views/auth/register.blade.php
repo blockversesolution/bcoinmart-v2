@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="signup-content">
-                        <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
+                        <a class="sign-up-logo" href="{{url('/')}}"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <h3>Welcome To BcoinMart</h3>
                         <form action="{{route('register')}}" method="POST" class="signup-form">
                             @csrf

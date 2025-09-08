@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="signup-content">
-                        <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
+                        <a class="sign-up-logo" href="{{url('/')}}"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <div class="login-qr-box d-flex align-items-center justify-content-between ">
                             <h3 class="m-0">Log in</h3>
                             <div class="login-qr">

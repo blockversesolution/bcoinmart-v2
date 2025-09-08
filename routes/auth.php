@@ -40,9 +40,12 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [ForgotPasswordController::class, 'store'])
         ->name('password.confirmation');
 
-
     Route::get('/auth/{provider}', [SocialLoginController::class, 'redirect'])->name('social.redirect');
     Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
+
+    Route::get('2fa-enabled', [LoginController::class, 'show2faForm'])->name('2fa.index');
+    Route::post('2fa-verify', [LoginController::class, 'verify2fa'])->name('2fa.verify');
+
 
 });
 
@@ -50,4 +53,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [LoginController::class, 'destroy'])
         ->name('logout');
+
+    Route::get('enable-2fa', [LoginController::class, 'enable2fa'])->name('enable.2fa');
+
 });

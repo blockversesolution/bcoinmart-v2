@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
+use PragmaRX\Google2FA\Google2FA;
 
 class LoginController extends Controller
 {
@@ -85,11 +86,24 @@ class LoginController extends Controller
             ];
         }
         if (Auth::attempt($credentials)) {
+
+
+            $user = Auth::user();
+
+            if ($user->two_factor_enabled) {
+                session(['2fa:user_id' => $user->id]);
+                Auth::logout();
+                Alert::info('Two-Factor Verification', 'Please verify your OTP to continue.');
+                return redirect()->route('2fa.index');
+            }
+
+            // Normal login
             $request->session()->regenerate();
             $request->session()->forget(['email', 'phone']);
             Alert::success('Success', 'Login successful');
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('dashboard'));
         }
+        Alert::error('Error', 'Wrong credentials, please try again.');
         return redirect()->back();
     }
 
@@ -105,5 +119,50 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function enable2fa()
+    {
+        $user = Auth::user();
+        $google2fa = new Google2FA();
+        $user->google2fa_secret = $google2fa->generateSecretKey();
+        $user->two_factor_enabled = true;
+        $user->save();
+
+        return redirect('/')->with('two_factor_secret', $user->google2fa_secret);
+    }
+
+    public function show2faForm(Request $request): View
+    {
+        if (!$request->session()->has('2fa:user_id')) {
+            return redirect()->route('login');
+        }
+        $data['page_title'] = '2FA Verification';
+        return view('auth.2fa', $data);
+    }
+
+    public function verify2Fa(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'otp' => 'required|digits:6',
+        ]);
+
+        $userId = session('2fa:user:id');
+        if(!$userId) {
+            Alert::error('Error', 'Session expired, please login again.');
+            return redirect()->route('login');
+        }
+
+        $user = User::find($userId);
+        $google2fa = new Google2FA();
+
+        if($google2fa->verifyKey($user->google2fa_secret, $request->otp)) {
+            Auth::login($user);
+            session()->forget('2fa:user:id');
+            Alert::success('Success', '2fa verified');
+            return redirect()->route('dashboard');
+        }
+        Alert::error('Error', 'Invalid verification code.');
+        return redirect()->back();
     }
 }

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="signup-content">
-                        <a class="sign-up-logo" href="#"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
+                        <a class="sign-up-logo" href="{{url('/')}}"><img src="{{asset('frontend')}}/assets/images/logo.png" alt=""></a>
                         <h3>Verify your OTP</h3>
                         <p class="verify-text mb-30">A 6-digit code has been sent to
                             @if(isset($email))
