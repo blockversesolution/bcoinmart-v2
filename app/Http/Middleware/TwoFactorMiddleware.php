@@ -19,17 +19,22 @@ class TwoFactorMiddleware
     {
         $user = Auth::user();
 
-        if ($user) {
+        if ($user && $user->two_factor_enabled) {
+            // Skip 2FA routes to prevent redirect loops
+            if (!$request->session()->get('2fa_verified') && !$request->is('2fa*')) {
 
-            if ($user->two_factor_enabled && !session('2fa_verified')) {
+                // Save user ID in session for verification
+                $request->session()->put('2fa:user_id', $user->id);
 
-                session(['url.intended' => url()->current()]);
+                // Logout immediately
+                Auth::logout();
 
-                Alert::warning('2FA Verification', 'Please complete two-factor authentication to proceed.');
-                return redirect()->route('2fa.index');
+                Alert::info('Two-Factor Verification Needed', 'Please login again and  verify your OTP to continue.');
+                return redirect()->route('login');
             }
         }
 
         return $next($request);
+
     }
 }

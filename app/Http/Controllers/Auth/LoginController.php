@@ -147,7 +147,7 @@ class LoginController extends Controller
             'otp' => 'required|digits:6',
         ]);
 
-        $userId = session('2fa:user:id');
+        $userId = session('2fa:user_id');
         if(!$userId) {
             Alert::error('Error', 'Session expired, please login again.');
             return redirect()->route('login');

@@ -43,7 +43,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/auth/{provider}', [SocialLoginController::class, 'redirect'])->name('social.redirect');
     Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('social.callback');
 
-    Route::get('2fa-enabled', [LoginController::class, 'show2faForm'])->name('2fa.index');
+    Route::get('2fa-auth', [LoginController::class, 'show2faForm'])->name('2fa.index');
     Route::post('2fa-verify', [LoginController::class, 'verify2fa'])->name('2fa.verify');
 
 
