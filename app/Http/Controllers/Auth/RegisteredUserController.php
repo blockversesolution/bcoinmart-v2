@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Jobs\OTPVerificationMailJob;
 use App\Models\TempUser;
 use App\Models\User;
+use App\Services\SmsGateway\TwilioService;
+use App\Services\SmsGateway\VonageNexmoService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -86,6 +88,12 @@ class RegisteredUserController extends Controller
                 ]
             );
         }
+        if ($phone){
+//            $sms = new TwilioService();
+//            $sms->sendSms($phone, "Your OTP code is: {$tempUser->code}");
+//            $sms = new VonageNexmoService();
+//            $sms->send($phone, "Your OTP code is: {$tempUser->code}");
+        }
 
         Alert::success('Success', 'Your otp sent to your registered email address or phone number.');
         return redirect()->route('register.verification');
@@ -132,6 +140,12 @@ class RegisteredUserController extends Controller
                         'code' => $tempUser->code,
                     ]
                 );
+            }
+            if ($request->phone) {
+                //            $sms = new TwilioService();
+//            $sms->sendSms($phone, "Your OTP code is: {$tempUser->code}");
+//                $sms = new VonageNexmoService();
+//                $sms->send($request->phone, "Your OTP code is: {$tempUser->code}");
             }
 
             Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
@@ -216,6 +230,13 @@ class RegisteredUserController extends Controller
                     'code' => $tempUser->code,
                 ]
             );
+        }
+
+        if ($phone){
+//            $sms = new TwilioService();
+//            $sms->sendSms($phone, "Your OTP code is: {$tempUser->code}");
+//            $sms = new VonageNexmoService();
+//            $sms->send($phone, "Your OTP code is: {$tempUser->code}");
         }
 
         Alert::success('Success', 'A new OTP has been sent to your registered contact information.');
