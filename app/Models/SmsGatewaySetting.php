@@ -6,27 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class KYC extends Model
+class SmsGatewaySetting extends Model
 {
     use LogsActivity;
     protected $fillable = [
-        'user_id',
-        'document_type',
-        'file_path',
+        'gateway_name',
+        'twilio_sid',
+        'twilio_auth_token',
+        'twilio_number',
+        'vonage_nexmo_key',
+        'vonage_nexmo_secret',
+        'vonage_nexmo_brand',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class)
-            ->select('id','name','email', 'phone');
-    }
 
     public function getActivitylogOptions():LogOptions
     {
         return LogOptions::defaults()
             ->logOnly($this->fillable)
-            ->useLogName('kyc')
+            ->useLogName('sms_gateway_setting')
             ->logOnlyDirty()
-            ->setDescriptionForEvent(fn(string $eventName) => "KYC has been {$eventName}");
+            ->setDescriptionForEvent(fn(string $eventName) => "SmsGatewaySetting has been {$eventName}");
     }
 }

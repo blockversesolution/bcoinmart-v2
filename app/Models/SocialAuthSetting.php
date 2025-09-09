@@ -6,27 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class KYC extends Model
+class SocialAuthSetting extends Model
 {
     use LogsActivity;
     protected $fillable = [
-        'user_id',
-        'document_type',
-        'file_path',
+        'provider',
+        'client_id',
+        'client_secret',
+        'redirect_url',
+        'bot_name',
+        'token',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class)
-            ->select('id','name','email', 'phone');
-    }
 
     public function getActivitylogOptions():LogOptions
     {
         return LogOptions::defaults()
             ->logOnly($this->fillable)
-            ->useLogName('kyc')
+            ->useLogName('social_auth_setting')
             ->logOnlyDirty()
-            ->setDescriptionForEvent(fn(string $eventName) => "KYC has been {$eventName}");
+            ->setDescriptionForEvent(fn(string $eventName) => "SocialAuthSetting has been {$eventName}");
     }
 }

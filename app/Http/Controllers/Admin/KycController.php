@@ -36,7 +36,7 @@ class KycController extends Controller
                 'kyc',
                 null,
                 true,
-                [150,150],
+                [],
                 null
             ),
         ]);
