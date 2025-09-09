@@ -90,7 +90,14 @@ if (! function_exists('setToEnv') ){
         }
 
         if ($type == 'sendbirdge'){
-            setEnvVariable('SENDBIRDGE_API_TOKEN', $setting['sendbirdge_api_token'] ?? '');
+            setEnvVariable('SENDBIRDGE_API_TOKEN', $setting->sendbirdge_api_token ?? '');
+        }
+
+        if ($type == 'general'){
+            setEnvVariable('APP_NAME', $setting['site_name'] ?? '');
+            setEnvVariable('TIMEZONE', $setting['timezone'] ?? '');
+            setEnvVariable('DATE_FORMAT', $setting['date_format'] ?? '');
+            setEnvVariable('TIME_FORMAT', $setting['time_format'] ?? '');
         }
 
         if ($type == 'authentication')

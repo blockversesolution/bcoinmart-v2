@@ -82,6 +82,7 @@ class SettingsController extends Controller
         } else {
             $data['site_favicon'] = $setting->site_favicon ?? null;
         }
+        setToEnv($data, 'general');
         setToEnv($data,'sendbirdge');
         if ($setting) {
             $setting->update($data);
