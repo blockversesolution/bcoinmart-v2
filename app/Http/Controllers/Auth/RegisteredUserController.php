@@ -138,37 +138,37 @@ class RegisteredUserController extends Controller
             return redirect()->route('register.verification');
         }
 
-        if (!$tempUser->created_at || $tempUser->created_at->lt(now()->subMinutes(1))) {
-            $tempUser->update([
-                'code' => rand(100000, 999999),
-                'created_at' => now()
-            ]);
-
-            if ($request->email){
-                if (!isMailConfigured()){
-                    Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
-                    return back();
-                }
-                OTPVerificationMailJob::dispatch(
-                    $request->email,
-                    'Your Email Verification Code',
-                    '\App\Mail\RegistrationVerificationMail',
-                    'mail.registration_verification_mail',
-                    [
-                        'code' => $tempUser->code,
-                    ]
-                );
-            }
-            if ($request->phone) {
-                //            $sms = new TwilioService();
-//            $sms->sendSms($phone, "Your OTP code is: {$tempUser->code}");
-//                $sms = new VonageNexmoService();
-//                $sms->send($request->phone, "Your OTP code is: {$tempUser->code}");
-            }
-
-            Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
-            return redirect()->route('register.verification');
-        }
+//        if (!$tempUser->created_at || $tempUser->created_at->lt(now()->subMinutes(1))) {
+//            $tempUser->update([
+//                'code' => rand(100000, 999999),
+//                'created_at' => now()
+//            ]);
+//
+//            if ($request->email){
+//                if (!isMailConfigured()){
+//                    Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+//                    return back();
+//                }
+//                OTPVerificationMailJob::dispatch(
+//                    $request->email,
+//                    'Your Email Verification Code',
+//                    '\App\Mail\RegistrationVerificationMail',
+//                    'mail.registration_verification_mail',
+//                    [
+//                        'code' => $tempUser->code,
+//                    ]
+//                );
+//            }
+//            if ($request->phone) {
+//                //            $sms = new TwilioService();
+////            $sms->sendSms($phone, "Your OTP code is: {$tempUser->code}");
+////                $sms = new VonageNexmoService();
+////                $sms->send($request->phone, "Your OTP code is: {$tempUser->code}");
+//            }
+//
+//            Alert::warning('Warning', 'OTP expired. We send you a new otp please check your email.');
+//            return redirect()->route('register.verification');
+//        }
 
         return redirect()->route('register.password.set');
 
