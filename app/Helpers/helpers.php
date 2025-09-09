@@ -16,11 +16,20 @@ if (!function_exists('isEmailValid')) {
 
         $response = Http::get("https://api.sendbridge.com/v1/validate/{$token}/{$email}")->json();
 
-        return isset($response['valid_syntax'], $response['valid_tld'], $response['rcpt_exists'], $response['temporarily_undeliverable'])
-            && $response['valid_syntax'] === true
-            && $response['valid_tld'] === true
-            && $response['rcpt_exists'] === true
-            && $response['temporarily_undeliverable'] === false;
+        if (
+            !empty($response['valid_syntax']) &&
+            !empty($response['valid_tld']) &&
+            !empty($response['rcpt_exists']) &&
+            isset($response['temporarily_undeliverable']) &&
+            $response['valid_syntax'] === true &&
+            $response['valid_tld'] === true &&
+            $response['rcpt_exists'] === true &&
+            $response['temporarily_undeliverable'] === false
+        ) {
+            return true;
+        }
+
+        return false;
 
     }
 
