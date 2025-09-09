@@ -154,7 +154,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Futures</a>
+                            <a class="nav-link" href="{{route('frontend.page.maintenance')}}">Futures</a>
                         </li>
                         <li class="nav-item dropdown">
 
@@ -234,8 +234,8 @@
                         >
                             <span><i class="fa-solid fa-magnifying-glass"></i></span>
                         </div>
-                        <a href="sign-up.html" class="primary-btn me-2">Sign Up</a>
-                        <a href="sign-in.html" class="secondary-btn">Sign In</a>
+                        <a href="{{route('register')}}" class="primary-btn me-2">Sign Up</a>
+                        <a href="{{route('login')}}" class="secondary-btn">Sign In</a>
 
                         <!-- Desktop Language View -->
                         <div class="desktop-language-view">
