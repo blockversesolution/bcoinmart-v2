@@ -89,6 +89,10 @@ class ForgotPasswordController extends Controller
         ]);
 
         if ($data['email']) {
+            if (!isMailConfigured()){
+                Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+                return back();
+            }
             OTPVerificationMailJob::dispatch(
                 $data['email'],
                 'Password Reset OTP',
@@ -174,6 +178,10 @@ class ForgotPasswordController extends Controller
             'code' => rand(100000, 999999),
         ]);
         if ($email) {
+            if (!isMailConfigured()){
+                Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+                return back();
+            }
             OTPVerificationMailJob::dispatch(
                 $email,
                 'Password Reset OTP',

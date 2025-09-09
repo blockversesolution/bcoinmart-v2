@@ -11,9 +11,8 @@ if (!function_exists('isEmailValid')) {
      * @param string $email
      * @return bool
      */
-    function isEmailValid(string $email): bool
+    function isEmailValid(string $email, $token): bool
     {
-        $token = config('services.sendbirdge.api_token');
 
         $response = Http::get("https://api.sendbridge.com/v1/validate/{$token}/{$email}")->json();
 
@@ -186,5 +185,56 @@ if (!function_exists('getGeneralSetting')) {
     {
         $setting = GeneralSetting::first();
         return $setting ? $setting->$column : null;
+    }
+}
+
+if (!function_exists('isMailConfigured')){
+    function isMailConfigured(): bool
+    {
+        return !(
+            empty(config('mail.mailers.smtp.host')) ||
+            empty(config('mail.mailers.smtp.port')) ||
+            empty(config('mail.mailers.smtp.username')) ||
+            empty(config('mail.mailers.smtp.password')) ||
+            empty(config('mail.from.address'))
+        );
+    }
+}
+
+if (!function_exists('isSmsConfigured')){
+    function isSmsConfigured(): bool
+    {
+        return !(
+            empty(config('services.twilio.sid')) ||
+            empty(config('services.twilio.token')) ||
+            empty(config('services.twilio.from'))
+        ) || !(
+            empty(config('services.vonage.key')) ||
+            empty(config('services.vonage.secret')) ||
+            empty(config('services.vonage.brand'))
+        );
+    }
+}
+
+if (!function_exists('isSocialAuthConfigured')){
+    function isSocialAuthConfigured(string $provider): bool
+    {
+        if ($provider === 'google') {
+            return !(
+                empty(config('services.google.client_id')) ||
+                empty(config('services.google.client_secret')) ||
+                empty(config('services.google.redirect'))
+            );
+        }
+
+        if ($provider === 'telegram') {
+            return !(
+                empty(config('services.telegram.bot')) ||
+                empty(config('services.telegram.client_secret')) ||
+                empty(config('services.telegram.redirect'))
+            );
+        }
+
+        return false;
     }
 }

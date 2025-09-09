@@ -20,6 +20,12 @@ class SocialLoginController extends Controller
             Alert::error('Error', 'Invalid social provider.');
             return redirect()->route('login');
         }
+
+        if (!isSocialAuthConfigured($provider)) {
+            Alert::error('Error', 'Social authentication is not configured properly. We need some time to fix it.');
+            return redirect()->route('login');
+        }
+
         return Socialite::driver($provider)->redirect();
     }
 

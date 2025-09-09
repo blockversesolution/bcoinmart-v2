@@ -43,8 +43,12 @@ class RegisteredUserController extends Controller
 
         if (filter_var($request->contact_info, FILTER_VALIDATE_EMAIL)) {
             $email = $request->contact_info;
-
-            if (!isEmailValid($email)){
+            $token = env("SENDBRIDGE_API_TOKEN");
+            if ($token == null){
+                Alert::error('Error', 'Email validation service is not configured. We need some time to fix it');
+                return back();
+            }
+            if (!isEmailValid($email,$token)){
                 Alert::warning('Warning', 'Please provide a valid email address.');
                 return back();
             }
@@ -84,6 +88,10 @@ class RegisteredUserController extends Controller
         $request->session()->put('register_phone', $phone);
 
         if ($email){
+            if (!isMailConfigured()){
+                Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+                return back();
+            }
             OTPVerificationMailJob::dispatch(
                 $email,
                 'Your Email Verification Code',
@@ -137,6 +145,10 @@ class RegisteredUserController extends Controller
             ]);
 
             if ($request->email){
+                if (!isMailConfigured()){
+                    Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+                    return back();
+                }
                 OTPVerificationMailJob::dispatch(
                     $request->email,
                     'Your Email Verification Code',
@@ -227,6 +239,10 @@ class RegisteredUserController extends Controller
         }
 
         if ($email) {
+            if (!isMailConfigured()){
+                Alert::error('Error', 'Mail service is not configured. We need some time to fix it');
+                return back();
+            }
             OTPVerificationMailJob::dispatch(
                 $email,
                 'Your Email Verification Code',
