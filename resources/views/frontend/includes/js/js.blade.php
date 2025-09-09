@@ -10,7 +10,6 @@
 
 <script src="{{asset('frontend')}}/assets/js/main.js"></script>
 
-@stack('js')
 <script>
     document
         .querySelectorAll(".dropdown-custom .dropdown-menu .dropdown-item")
@@ -28,6 +27,7 @@
                 button.innerHTML = `<img src="${image}" alt="${value}"> <span>${value}</span>`;
             });
         });
+
 
     const ctx = document.getElementById("cryptoChart").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -361,3 +361,4 @@
 
 </script>
 
+@stack('js')

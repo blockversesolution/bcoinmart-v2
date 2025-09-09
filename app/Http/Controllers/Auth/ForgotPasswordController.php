@@ -88,19 +88,25 @@ class ForgotPasswordController extends Controller
             'code' => rand(100000, 999999),
         ]);
 
-//        if ($data['email']) {
-//            OTPVerificationMailJob::dispatch(
-//                $data['email'],
-//                'Password Reset OTP',
-//                'App\Mail\ResetPasswordOtpMail',
-//                'mail.reset_password_mail',
-//                ['code' => $resetCode->code]
-//            );
-//            Alert::success('Success', 'OTP has been sent to your email.');
-//        } elseif ($data['phone']) {
-//
-//            Alert::success('Success', 'OTP has been sent to your phone.');
-//        }
+        if ($data['email']) {
+            OTPVerificationMailJob::dispatch(
+                $data['email'],
+                'Password Reset OTP',
+                'App\Mail\ResetPasswordOtpMail',
+                'mail.reset_password_mail',
+                ['code' => $resetCode->code]
+            );
+            Alert::success('Success', 'OTP has been sent to your email.');
+        }
+        if ($data['phone']) {
+
+//            $sms = new TwilioService();
+//            $sms->sendSms($phone, "Your OTP code is: {$resetCode->code}");
+//            $sms = new VonageNexmoService();
+//            $sms->send($phone, "Your OTP code is: {$resetCode->code}");
+
+            Alert::success('Success', 'OTP has been sent to your phone.');
+        }
 
         return view('auth.forgot_password_verification', $data);
     }
@@ -177,7 +183,10 @@ class ForgotPasswordController extends Controller
             );
             Alert::success('Success', 'OTP has been resent to your email.');
         } elseif ($phone) {
-
+//            $sms = new TwilioService();
+//            $sms->sendSms($phone, "Your OTP code is: {$resetCode->code}");
+//            $sms = new VonageNexmoService();
+//            $sms->send($phone, "Your OTP code is: {$resetCode->code}");
             Alert::success('Success', 'OTP has been resent to your phone.');
         }
         return back();
