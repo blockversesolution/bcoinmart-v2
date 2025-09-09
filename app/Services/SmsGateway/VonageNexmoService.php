@@ -13,12 +13,12 @@ class VonageNexmoService
     public function __construct()
     {
         $credentials = new Basic(
-            env('VONAGE_NEXMO_KEY'),
-            env('VONAGE_NEXMO_SECRET')
+            config('services.vonage.key'),
+            config('services.vonage.secret')
         );
 
         $this->client = new Client($credentials);
-        $this->brand = env('VONAGE_NEXMO_BRAND', 'bCoinMart');
+        $this->brand = config('services.vonage.brand');
     }
 
     /**

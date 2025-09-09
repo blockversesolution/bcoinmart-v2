@@ -35,9 +35,9 @@ return [
         ],
     ],
     'google' => [
-        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('GOOGLE_REDIRECT_URI'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
     'telegram' => [
         'bot' => env('TELEGRAM_BOT_NAME'),
@@ -45,5 +45,18 @@ return [
         'client_secret' => env('TELEGRAM_TOKEN'),
         'redirect' => env('TELEGRAM_REDIRECT_URI'),
     ],
+    'sendbirdge' => [
+        'api_token' => env('SENDBIRDGE_API_TOKEN'),
+    ],
+    'twilio' => [
+        'sid' => env('TWILIO_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+        'from' => env('TWILIO_NUMBER'),
+    ],
+    'vonage' => [
+        'key' => env('VONAGE_NEXMO_KEY'),
+        'secret' => env('VONAGE_NEXMO_SECRET'),
+        'brand' => env('VONAGE_NEXMO_BRAND'),
+    ]
 
 ];
