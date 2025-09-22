@@ -170,4 +170,33 @@ class LoginController extends Controller
         Alert::error('Error', 'Invalid verification code.');
         return redirect()->back();
     }
+
+
+    public function profileUpdate(Request $request): View
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->id()],
+            'phone' => ['required', 'string', 'max:15', 'unique:users,phone,'.auth()->id()],
+            'dob' => ['required', 'date'],
+            'address' => ['required', 'string', 'max:500'],
+            'city' => ['required', 'string', 'max:100'],
+            'state' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
+            'zip' => ['required', 'string', 'max:20'],
+        ]);
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->dob = $request->dob;
+        $user->address = $request->address;
+        $user->city = $request->city;
+        $user->state = $request->state;
+        $user->country = $request->country;
+        $user->zip = $request->zip;
+        $user->save();
+        Alert::success('Success', 'Profile updated successfully');
+        return response()->json($user);
+    }
 }

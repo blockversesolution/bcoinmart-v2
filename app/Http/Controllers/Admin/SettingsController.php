@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\ImageUploadEngine;
+use App\Helpers\Classes\ImageUploadEngine;
 use App\Http\Controllers\Controller;
 use App\Models\EmailSetting;
 use App\Models\GeneralSetting;

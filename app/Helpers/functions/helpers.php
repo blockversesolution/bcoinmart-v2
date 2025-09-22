@@ -247,3 +247,21 @@ if (!function_exists('isSocialAuthConfigured')){
         return false;
     }
 }
+
+if ( ! function_exists('limit') ){
+    /**
+     * @param $query
+     * @return int|mixed $paginate,
+     */
+    function limit($query){
+        $paginate = 10;
+
+        if (array_key_exists('limit',$query)){
+            if ($query['limit']){
+                $paginate = $query['limit'];
+            }
+        }
+
+        return $paginate;
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "LocationManagement",
+    "alias": "locationmanagement",
+    "description": "Location Management module",
+    "keywords": ["location"],
+    "active": true,
+    "providers": [
+        "Modules\\LocationManagement\\Providers\\LocationManagementServiceProvider"
+    ]
+}
+
