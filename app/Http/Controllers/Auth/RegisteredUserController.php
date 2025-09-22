@@ -81,7 +81,7 @@ class RegisteredUserController extends Controller
             [
                 'contact_info' => $request->contact_info,
                 'is_agreed' => $request->has('is_agreed') ? 1 : 0,
-                'code' => rand(100000, 999999)
+                'code' => rand(100000, 999999),
             ]
         );
 
@@ -202,7 +202,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email ?? '',
             'phone' => $request->phone ?? '',
             'password' => Hash::make($request->password),
-            'is_agreed' => 1
+            'is_agreed' => 1,
+            'code' => generateUserCode()
         ]);
 
         TempUser::where('contact_info', $request->email ?? $request->phone)->delete();
