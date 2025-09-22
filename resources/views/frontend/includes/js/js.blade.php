@@ -10,25 +10,6 @@
 
 <script src="{{asset('frontend')}}/assets/js/main.js"></script>
 
-@stack('js')
-<!-- <script>
-  const cards = document.querySelectorAll(".crypto-card-sm");
-  let index = 0;
-  function loopZoom() {
-    cards.forEach((card, i) => {
-      card.classList.remove("zoomed");
-    });
-
-    cards[index].classList.add("zoomed");
-
-    index = (index + 1) % cards.length;
-
-    setTimeout(loopZoom, 1000);
-  }
-  loopZoom();
-</script> -->
-<!-- Token Selection Script -->
-
 <script>
     document
         .querySelectorAll(".dropdown-custom .dropdown-menu .dropdown-item")
@@ -46,6 +27,7 @@
                 button.innerHTML = `<img src="${image}" alt="${value}"> <span>${value}</span>`;
             });
         });
+
 
     const ctx = document.getElementById("cryptoChart").getContext("2d");
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -379,3 +361,4 @@
 
 </script>
 
+@stack('js')
