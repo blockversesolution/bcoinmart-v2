@@ -265,3 +265,28 @@ if ( ! function_exists('limit') ){
         return $paginate;
     }
 }
+
+if (!function_exists('generateUserCode')){
+    function generateUserCode()
+    {
+        return DB::transaction(function () {
+            // Lock the row to prevent race condition
+            $counter = DB::table('counters')
+                ->where('name', 'user_code')
+                ->lockForUpdate()
+                ->first();
+
+            // Increment counter
+            $newValue = $counter->value + 1;
+
+            // Update counter
+            DB::table('counters')
+                ->where('name', 'user_code')
+                ->update(['value' => $newValue]);
+
+            // Format code: USER000001
+            return 'USER' . str_pad($newValue, 6, '0', STR_PAD_LEFT);
+        });
+    }
+
+}

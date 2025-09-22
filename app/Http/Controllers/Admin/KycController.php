@@ -2,34 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Classes\ApiResponse;
 use App\Helpers\Classes\ImageUploadEngine;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KycRequest;
+use App\Http\Requests\KycStatusRequest;
 use App\Models\KYC;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class KycController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data=KYC::with('user')->orderBy('id','DESC')->get();
+        $data=KYC::with('user')->orderBy('id','DESC')->paginate($request->all());
         return $data;
     }
 
-    public function create()
+    public function store(KycRequest $request)
     {
-
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-           'user_id' => 'required|exists:users,id',
-            'document_type' => 'required|string|max:255',
-            'file' => 'required|string|max:255',
-        ]);
-
         $data = Kyc::create([
             'user_id' => $request->user_id,
+            'verification_type' => $request->verification_type,
             'document_type' => $request->document_type,
             'file_path' => ImageUploadEngine::process(
                 $request->file,
@@ -41,76 +35,51 @@ class KycController extends Controller
             ),
         ]);
 
-        return $data;
+        return ApiResponse::success(200, 'KYC record created successfully', $data);
     }
 
     public function show($id)
     {
         $data=KYC::with('user')->find($id);
-        return $data;
+        return ApiResponse::success(200, 'KYC record created successfully', $data);
     }
-
-
-    public function edit($id)
-    {
-
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        $data = KYC::find($id);
-        if (!$data) {
-            return response()->json(['message' => 'KYC record not found'], 404);
-        }
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'document_type' => 'required|string|max:255',
-            'file' => 'nullable|string|max:255',
-        ]);
-        if ($request->file) {
-            ImageUploadEngine::deleteImage($data->file_path);
-            $filePath = ImageUploadEngine::process(
-                $request->file,
-                'kyc',
-                null,
-                true,
-                [150,150],
-                $data->file_path
-            );
-            $data->file_path = $filePath;
-        }
-        $data->user_id = $request->user_id;
-        $data->document_type = $request->document_type;
-        $data->save();
-        return $data;
-
-    }
-
 
     public function destroy($id)
     {
         $data = KYC::find($id);
         if (!$data) {
-            return response()->json(['message' => 'KYC record not found'], 404);
+            return ApiResponse::notFound(404, 'KYC record not found');
+        }
+
+        if ($data->status === 'approved') {
+            return ApiResponse::forbidden(Response::HTTP_NOT_ACCEPTABLE, 'Approved KYC records cannot be deleted');
         }
         ImageUploadEngine::deleteImage($data->file_path);
         $data->delete();
-        return response()->json(['message' => 'KYC record deleted successfully'], 200);
+        return ApiResponse::success(200, 'KYC record deleted successfully');
     }
 
-    public function statusChange(Request $request,$id)
+    public function statusChange(KycStatusRequest $request,$id)
     {
-        $request->validate([
-            'status' => 'required|in:pending,approved,rejected',
-        ]);
         $data = KYC::find($id);
+
         if (!$data) {
-            return response()->json(['message' => 'KYC record not found'], 404);
+            return ApiResponse::notFound(404, 'KYC record not found');
+        }
+
+        if ($data->status === 'approved') {
+            return ApiResponse::forbidden(Response::HTTP_NOT_ACCEPTABLE, 'Approved KYC records cannot be deleted');
         }
         $data->status = $request->status;
         $data->save();
-        return response()->json(['message' => 'KYC status updated successfully'], 200);
+        return ApiResponse::success(200, 'KYC status updated successfully', $data);
+    }
+
+    private function filter($query, $data)
+    {
+        if (array_key_exists('user_id', $data)) {
+
+        }
     }
 
 }

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('k_y_c_s', function (Blueprint $table) {
+            $table->enum('verification_type', ['address', 'identity'])->nullable()->after('user_id');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::table('k_y_c_s', function (Blueprint $table) {
+            $table->dropColumn('verification_type');
+        });
     }
 };

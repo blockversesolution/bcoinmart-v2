@@ -11,6 +11,7 @@ class KYC extends Model
     use LogsActivity;
     protected $fillable = [
         'user_id',
+        'verification_type',
         'document_type',
         'file_path',
     ];
@@ -18,7 +19,17 @@ class KYC extends Model
     public function user()
     {
         return $this->belongsTo(User::class)
-            ->select('id','name','email', 'phone');
+            ->select(
+                'id',
+                'name',
+                'email',
+                'phone',
+                'country',
+                'state',
+                'city',
+                'address',
+                'zip_code',
+            );
     }
 
     public function getActivitylogOptions():LogOptions
@@ -29,4 +40,18 @@ class KYC extends Model
             ->logOnlyDirty()
             ->setDescriptionForEvent(fn(string $eventName) => "KYC has been {$eventName}");
     }
+
+    /**
+     * Accessor to get the full file path.
+     */
+    public function getFilePathAttribute(): ?string
+    {
+        $fileName = $this->attributes['file_path'] ?? null;
+        if (!$fileName) {
+            return null;
+        }
+        return url('/images/kyc/' . $fileName);
+    }
+
+
 }
