@@ -122,5 +122,32 @@ class KycController extends Controller
         );
     }
 
+    public function resubmit(KycRequest $request, $id)
+    {
+        $data = KYC::find($id);
+        if (!$data) {
+            return ApiResponse::notFound(404, 'KYC record not found');
+        }
+        if ($data->status === 'approved') {
+            return ApiResponse::forbidden(Response::HTTP_NOT_ACCEPTABLE, 'Approved KYC records cannot be resubmitted');
+        }
+        // Delete old file
+        ImageUploadEngine::deleteImage($data->file_path);
+        // Upload new file
+        $data->file_path = ImageUploadEngine::process(
+            $request->file,
+            'kyc',
+            null,
+            true,
+            [],
+            null
+        );
+        $data->verification_type = $request->verification_type;
+        $data->document_type = $request->document_type;
+        $data->status = 'pending';
+        $data->save();
+        return ApiResponse::success(200, 'KYC record resubmitted successfully', $this->mainQuery()->where('id', $data->id)->first());
+    }
+
 
 }

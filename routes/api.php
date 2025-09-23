@@ -20,6 +20,7 @@ Route::prefix('v1')->as('api')->group(function () {
         Route::delete('delete/{id}',[KycController::class, 'destroy'])->name('delete');
         Route::patch('status-change/{id}',[KycController::class, 'statusChange'])->name('status-change');
         Route::post('bulk-action', [KycController::class, 'bulkAction'])->name('kyc.bulkAction');
+        Route::post('resubmit/{id}', [KycController::class, 'resubmit'])->name('kyc.resubmit');
 
     });
 
