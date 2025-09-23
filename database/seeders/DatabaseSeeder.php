@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
 //        DB::table('counters')->insert([
 //            'name' => 'user_code',
 //            'value' => 0,
+//        ],[
+//            'name' => 'kyc_code',
+//            'value' => 0,
 //        ]);
     }
 }

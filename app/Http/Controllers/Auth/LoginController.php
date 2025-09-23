@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -172,30 +173,11 @@ class LoginController extends Controller
     }
 
 
-    public function profileUpdate(Request $request): View
+    public function profileUpdate(ProfileUpdateRequest $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->id()],
-            'phone' => ['required', 'string', 'max:15', 'unique:users,phone,'.auth()->id()],
-            'dob' => ['required', 'date'],
-            'address' => ['required', 'string', 'max:500'],
-            'city' => ['required', 'string', 'max:100'],
-            'state' => ['required', 'string', 'max:100'],
-            'country' => ['required', 'string', 'max:100'],
-            'zip' => ['required', 'string', 'max:20'],
-        ]);
+        $data = $request->validated();
         $user = Auth::user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->dob = $request->dob;
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->state = $request->state;
-        $user->country = $request->country;
-        $user->zip = $request->zip;
-        $user->save();
+        $user->update($data);
         Alert::success('Success', 'Profile updated successfully');
         return response()->json($user);
     }

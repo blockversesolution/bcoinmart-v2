@@ -203,7 +203,7 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone ?? '',
             'password' => Hash::make($request->password),
             'is_agreed' => 1,
-            'code' => generateUserCode()
+            'code' => generateUniqueCode('user_code', 'USER'),
         ]);
 
         TempUser::where('contact_info', $request->email ?? $request->phone)->delete();

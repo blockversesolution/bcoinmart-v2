@@ -186,8 +186,9 @@ class ImageUploadEngine
      * @param string $filePath
      * @return void
      */
-    public static function deleteImage(string $filePath): void
+    public static function deleteImage(string $path): void
     {
+        $filePath = toLocalPath($path);
         if (File::exists($filePath)) {
             File::delete($filePath);
             Log::info("Deleted old image: {$filePath}");

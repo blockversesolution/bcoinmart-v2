@@ -266,27 +266,46 @@ if ( ! function_exists('limit') ){
     }
 }
 
-if (!function_exists('generateUserCode')){
-    function generateUserCode()
+if (!function_exists('generateUniqueCode')){
+    function generateUniqueCode($value, $prefix)
     {
-        return DB::transaction(function () {
-            // Lock the row to prevent race condition
-            $counter = DB::table('counters')
-                ->where('name', 'user_code')
-                ->lockForUpdate()
-                ->first();
+        // Lock the row to prevent race condition
+        $counter = DB::table('counters')
+            ->where('name', $value)
+            ->lockForUpdate()
+            ->first();
 
-            // Increment counter
-            $newValue = $counter->value + 1;
+        if ($counter === null) {
+            throw new \RuntimeException("Counter with name '{$value}' not found.");
+        }
 
-            // Update counter
-            DB::table('counters')
-                ->where('name', 'user_code')
-                ->update(['value' => $newValue]);
+        // Increment counter
+        $newValue = $counter->value + 1;
 
-            // Format code: USER000001
-            return 'USER' . str_pad($newValue, 6, '0', STR_PAD_LEFT);
-        });
+        // Update counter
+        DB::table('counters')
+            ->where('name', $value)
+            ->update(['value' => $newValue]);
+
+        // Format code: USER000001
+        return $prefix . str_pad($newValue, 6, '0', STR_PAD_LEFT);
     }
 
+}
+
+if (!function_exists('toLocalPath')) {
+    /**
+     * Convert URL or relative path to local filesystem path
+     *
+     * @param string $filePath
+     * @return string
+     */
+    function toLocalPath(string $filePath): string
+    {
+        // Remove domain part if it's a full URL
+        $path = parse_url($filePath, PHP_URL_PATH);
+
+        // Convert to full local path
+        return public_path($path);
+    }
 }

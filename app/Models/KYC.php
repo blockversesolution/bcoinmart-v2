@@ -11,6 +11,7 @@ class KYC extends Model
     use LogsActivity;
     protected $fillable = [
         'user_id',
+        "application_code",
         'verification_type',
         'document_type',
         'file_path',
@@ -19,16 +20,23 @@ class KYC extends Model
     public function user()
     {
         return $this->belongsTo(User::class)
+            ->leftJoin("countries", "countries.id", "=", "users.country_id")
+            ->leftJoin("states", "states.id", "=", "users.state_id")
+            ->leftJoin("cities", "cities.id", "=", "users.city_id")
             ->select(
-                'id',
-                'name',
-                'email',
-                'phone',
-                'country',
-                'state',
-                'city',
-                'address',
-                'zip_code',
+                "users.id",
+                "users.name",
+                "users.email",
+                "users.phone",
+                "users.code",
+                "users.country_id",
+                "users.state_id",
+                "users.city_id",
+                "countries.name as country_name",
+                "states.name as state_name",
+                "cities.name as city_name",
+                "users.zip",
+                "users.address"
             );
     }
 
